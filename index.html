@@ -43,10 +43,12 @@
   }
   .nav-brand {
     font-family: 'Playfair Display', serif;
-    font-size: 1.4rem; font-weight: 700; color: var(--gold);
-    letter-spacing: 2px; text-transform: uppercase;
+    font-size: 1.3rem; font-weight: 400; color: var(--gold);
+    letter-spacing: 12px; text-transform: uppercase;
   }
-  .nav-brand span { color: var(--cream); font-weight: 400; }
+  .nav-brand img {
+    height: 28px; margin-right: .5rem; vertical-align: middle;
+  }
   .lang-switcher { display: flex; gap: .35rem; }
   .lang-btn {
     background: transparent; border: 1px solid var(--smoke);
@@ -225,8 +227,8 @@
   }
   .footer-brand {
     font-family: 'Playfair Display', serif;
-    font-size: 1.5rem; font-weight: 700; color: var(--gold);
-    letter-spacing: 2px; margin-bottom: .5rem;
+    font-size: 1.5rem; font-weight: 400; color: var(--gold);
+    letter-spacing: 14px; margin-bottom: .5rem;
   }
   footer p { color: var(--smoke); font-size: .8rem; }
   footer a { color: var(--gold); text-decoration: none; }
@@ -244,7 +246,7 @@
 
 <!-- NAV -->
 <nav>
-  <div class="nav-brand">Boston <span>Bar</span></div>
+  <div class="nav-brand"><img src="logo.jpg" alt="Bostom Bar"> B O S T O M</div>
   <div class="lang-switcher">
     <button class="lang-btn active" onclick="setLang('en')">EN</button>
     <button class="lang-btn" onclick="setLang('es')">ES</button>
@@ -446,7 +448,7 @@
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-brand">BOSTON BAR</div>
+  <div class="footer-brand">B O S T O M</div>
   <p data-i18n="footer_text">A premium mezcal experience. Sip it, don't shoot it.</p>
   <p style="margin-top:.8rem;">
     <a href="https://share.google/9KIeDQDgrd4nrPywb" target="_blank" data-i18n="footer_link">Visit Boston Bar →</a>
