@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Bostom Bar — Mezcal Masterclass</title>
+<link rel="icon" type="image/jpeg" href="logo.jpg">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.3.1/umd/react.production.min.js" crossorigin></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.3.1/umd/react-dom.production.min.js" crossorigin></script>
 <style>
@@ -54,12 +55,7 @@ nav{position:fixed;top:0;width:100%;z-index:100;background:rgba(26,22,17,.96);ba
 .tkwy ul{list-style:none;padding:0}
 .tkwy li{padding:.25rem 0;color:var(--cream-muted);font-size:.95rem}
 .tkwy li::before{content:'\25C6 ';color:var(--gold);font-size:.6rem;vertical-align:middle;margin-right:.4rem}
-.refs{max-width:900px;margin:0 auto;padding:3rem 2rem 2rem;border-top:1px solid rgba(200,168,110,.08)}
-.refs h2{font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--gold);margin-bottom:1rem}
-.refs ol{padding-left:1.2rem}
-.refs li{color:var(--cream-muted);font-size:.85rem;margin-bottom:.5rem}
-.refs a{color:var(--gold);text-decoration:none}
-.refs a:hover{text-decoration:underline}
+/* refs removed */
 footer{text-align:center;padding:3rem 2rem;border-top:1px solid rgba(200,168,110,.1);background:var(--dark-card)}
 .fbrand img{height:36px;margin-bottom:.8rem}
 footer p{color:var(--smoke);font-size:.8rem}
@@ -286,15 +282,7 @@ function App() {
     })
   );
 
-  // REFERENCES
-  var refs = h('section',{className:'refs'},
-    h('h2',null,t.ref),
-    h('ol',null,
-      h('li',null,'Fuego y Humo \u2014 ',h('em',null,'Advanced Guide to Drinking Mezcal'),'. ',h('a',{href:'https://fuegoyhumo.com/blogs/education/advanced-guide-to-drinking-mezcal',target:'_blank',rel:'noreferrer'},'fuegoyhumo.com')),
-      h('li',null,'Bostom Bar \u2014 Business Profile & Branding.'),
-      h('li',null,'Mezcalistas \u2014 ',h('em',null,'Ultimate Mezcal 101 Guide'),'. ',h('a',{href:'https://www.mezcalistas.com/mezcal-101/',target:'_blank',rel:'noreferrer'},'mezcalistas.com'))
-    )
-  );
+  var refs = null;
 
   // FOOTER
   var foot = h('footer',null,
