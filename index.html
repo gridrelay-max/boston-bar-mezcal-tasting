@@ -42,7 +42,7 @@ nav{position:fixed;top:0;width:100%;z-index:100;background:rgba(26,22,17,.96);ba
 .mtitle{font-family:'Playfair Display',serif;font-size:1.45rem;font-weight:600;color:var(--cream);transition:color .2s}
 .mdesc{color:var(--cream-muted);font-size:.9rem;margin-top:.2rem}
 .mtog{font-size:1.5rem;color:var(--gold);transition:transform .3s;min-width:30px;text-align:center}
-.mtog.open{transform:rotate(180deg)}
+.mtog.open{transform:rotate(90deg)}
 .mbody{overflow:hidden;max-height:0;opacity:0;transition:max-height .5s ease,opacity .4s ease}
 .mbody.open{max-height:8000px;opacity:1}
 .mcont{padding:0 0 2rem}
@@ -54,7 +54,7 @@ nav{position:fixed;top:0;width:100%;z-index:100;background:rgba(26,22,17,.96);ba
 .tkwy-t{font-size:.75rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--gold);margin-bottom:.5rem;font-weight:600}
 .tkwy ul{list-style:none;padding:0}
 .tkwy li{padding:.25rem 0;color:var(--cream-muted);font-size:.95rem}
-.tkwy li::before{content:'\25C6 ';color:var(--gold);font-size:.6rem;vertical-align:middle;margin-right:.4rem}
+.tkwy li::before{content:'\2022 ';color:var(--gold);font-size:.65rem;vertical-align:middle;margin-right:.5rem}
 /* refs removed */
 footer{text-align:center;padding:3rem 2rem;border-top:1px solid rgba(200,168,110,.1);background:var(--dark-card)}
 .fbrand img{height:36px;margin-bottom:.8rem}
@@ -93,8 +93,8 @@ en: {
   m4t:"Tasting & Enjoying Mezcal",m4d:"How to sip, what to look for, and why mezcal is worth savoring.",
   m4h1:"The Vessel & Pour",m4p1:'Pour about 1 oz neat into a traditional <strong>veladora</strong> (wide-mouthed glass) or a Glencairn whiskey glass. Watch for <strong>perlas</strong> (bubbles) \u2014 mezcaleros use them to gauge ABV. Let it breathe for a few minutes before sipping.',
   m4h2:"The Besos Technique",m4p2:'<strong>Besos</strong> means \u201ckisses.\u201d Sip the mezcal gently into the front of your mouth first, then \u201cchew\u201d it back over your tongue. Pay attention to the <strong>front</strong> (first impression), <strong>middle</strong> (palate development), and <strong>finish</strong> (lingering flavors). Is it creamy, bright, smoky, floral, earthy?',
-  m4h3:"Finding Good Mezcal",m4p3:"Find a local mezcal bar and order a flight \u2014 ask for quarter-ounce pours since mezcal runs 45\u201350% ABV. Look for 100% agave on the label, and remember: <strong>the best mezcal won\u2019t overpower you with smoke</strong>.",
-  m4k1:"Use a veladora or Glencairn glass; watch for perlas",m4k2:'Use \u201cbesos\u201d \u2014 sip to the front of the mouth, then chew back',m4k3:"Order flights at mezcal bars for easy comparison",m4k4:"Great mezcal is complex and balanced, not just smoky"
+  m4h3:"Pairing Mezcal",m4p3:"Mezcal pairs beautifully with bold flavors. A <strong>Blanco mezcal</strong> complements rich, full-bodied cigars \u2014 though be mindful that double-smoky combinations can overwhelm the palate. Aged expressions like <strong>reposado</strong> pair well with dark chocolate, dried fruits, and aged cheeses. For cocktails, mezcal shines in a smoky margarita or an Oaxacan Old Fashioned. Always look for <strong>100% agave</strong> on the label, and remember: the best mezcal won\u2019t overpower you with smoke \u2014 it will reveal layers of earth, fruit, and mineral.",
+  m4k1:"Use a veladora or Glencairn glass; observe the perlas",m4k2:'Employ the \u201cbesos\u201d technique \u2014 sip to the front, then let it travel',m4k3:"Pair Blanco with bold cigars; reposado with chocolate and aged cheese",m4k4:"Great mezcal reveals layers of complexity, not just smoke"
 },
 es: {
   ln:"Espa\u00f1ol",hero_title:"Masterclass de Mezcal",hero_sub:"Explora el mundo del mezcal \u2014 desde sus or\u00edgenes hasta c\u00f3mo servirlo \u2014 en 4 m\u00f3dulos.",hero_cta:"Empezar a Aprender",progress:"Progreso",cof:"de 4 completados",tkwy:"Puntos Clave",ref:"Referencias",ftxt:"Una experiencia premium de mezcal. Sorb\u00e9alo, no lo dispare.",fcopy:"\u00a9 2026 Bostom Bar. Todos los derechos reservados.",
@@ -116,8 +116,8 @@ es: {
   m4t:"Catar y Disfrutar el Mezcal",m4d:"C\u00f3mo sorber, qu\u00e9 buscar y por qu\u00e9 vale la pena saborearlo.",
   m4h1:"El Vaso y el Servicio",m4p1:'Sirve 30 ml en una <strong>veladora</strong> o vaso Glencairn. Observa las <strong>perlas</strong> para estimar el ABV. D\u00e9jalo reposar unos minutos.',
   m4h2:"La T\u00e9cnica de Besos",m4p2:'<strong>Besos</strong>: sorbe hacia la parte frontal de la boca, luego \u201cmastica\u201d sobre la lengua. Atiende a la <strong>entrada</strong>, <strong>medio</strong> y <strong>final</strong>.',
-  m4h3:"Encontrar Buen Mezcal",m4p3:"Busca un bar de mezcal y pide degustaci\u00f3n. 45\u201350% ABV. Busca 100% agave. <strong>El mejor mezcal no te abruma con humo</strong>.",
-  m4k1:"Usa veladora o Glencairn; observa las perlas",m4k2:'Usa \u201cbesos\u201d \u2014 sorbe al frente de la boca',m4k3:"Pide degustaciones para comparar",m4k4:"El gran mezcal es complejo y equilibrado"
+  m4h3:"Maridaje del Mezcal",m4p3:"El mezcal marida de maravilla con sabores intensos. Un <strong>mezcal blanco</strong> complementa puros de cuerpo completo. Las expresiones a\u00f1ejadas como el <strong>reposado</strong> van bien con chocolate oscuro, frutas secas y quesos curados. Busca siempre <strong>100% agave</strong>. <strong>El mejor mezcal no abruma con humo</strong> \u2014 revela capas de tierra, fruta y mineral.",
+  m4k1:"Usa veladora o Glencairn; observa las perlas",m4k2:'Emplea la t\u00e9cnica de \u201cbesos\u201d \u2014 sorbe y deja que recorra',m4k3:"Marida blanco con puros; reposado con chocolate y queso curado",m4k4:"El gran mezcal revela capas de complejidad, no solo humo"
 },
 ja: {
   ln:"\u65e5\u672c\u8a9e",hero_title:"\u30e1\u30b9\u30ab\u30eb \u30de\u30b9\u30bf\u30fc\u30af\u30e9\u30b9",hero_sub:"\u8d77\u6e90\u304b\u3089\u697d\u3057\u307f\u65b9\u307e\u3067\u30014\u3064\u306e\u30e2\u30b8\u30e5\u30fc\u30eb\u3067\u30e1\u30b9\u30ab\u30eb\u306e\u4e16\u754c\u3092\u63a2\u6c42\u3002",hero_cta:"\u5b66\u7fd2\u3092\u59cb\u3081\u308b",progress:"\u9032\u6357",cof:"/ 4 \u5b8c\u4e86",tkwy:"\u30ad\u30fc\u30dd\u30a4\u30f3\u30c8",ref:"\u53c2\u8003\u6587\u732e",ftxt:"\u30d7\u30ec\u30df\u30a2\u30e0\u306a\u30e1\u30b9\u30ab\u30eb\u4f53\u9a13\u3002\u30b7\u30e7\u30c3\u30c8\u3067\u306f\u306a\u304f\u3001\u3086\u3063\u304f\u308a\u5473\u308f\u3063\u3066\u3002",fcopy:"\u00a9 2026 Bostom Bar.",
@@ -139,8 +139,8 @@ ja: {
   m4t:"\u30c6\u30a4\u30b9\u30c6\u30a3\u30f3\u30b0\u3068\u697d\u3057\u307f\u65b9",m4d:"\u98f2\u307f\u65b9\u3001\u6ce8\u76ee\u30dd\u30a4\u30f3\u30c8\u3002",
   m4h1:"\u30b0\u30e9\u30b9\u3068\u6ce8\u304e\u65b9",m4p1:'<strong>\u30d9\u30e9\u30c9\u30fc\u30e9</strong>\u307e\u305f\u306fGlencairn\u306b\u7d0430ml\u3002<strong>\u30da\u30eb\u30e9\u30b9</strong>\u3067ABV\u3092\u63a8\u5b9a\u3002\u6570\u5206\u9593\u547c\u5438\u3055\u305b\u307e\u3059\u3002',
   m4h2:"\u30d9\u30bd\u30b9\u306e\u6280\u6cd5",m4p2:'<strong>\u30d9\u30bd\u30b9</strong>\u306f\u300c\u30ad\u30b9\u300d\u3002\u53e3\u306e\u524d\u90e8\u306b\u542b\u307f\u3001\u820c\u306e\u4e0a\u3067\u300c\u564c\u3080\u300d\u3088\u3046\u306b\u3002<strong>\u30d5\u30ed\u30f3\u30c8</strong>\u3001<strong>\u30df\u30c9\u30eb</strong>\u3001<strong>\u30d5\u30a3\u30cb\u30c3\u30b7\u30e5</strong>\u306b\u6ce8\u76ee\u3002',
-  m4h3:"\u826f\u3044\u30e1\u30b9\u30ab\u30eb\u306e\u898b\u3064\u3051\u65b9",m4p3:"\u30e1\u30b9\u30ab\u30eb\u30d0\u30fc\u3067\u30d5\u30e9\u30a4\u30c8\u3092\u6ce8\u6587\u300245\u301350% ABV\u3002100%\u30a2\u30ac\u30d9\u3092\u78ba\u8a8d\u3002<strong>\u6700\u9ad8\u306e\u30e1\u30b9\u30ab\u30eb\u306f\u30b9\u30e2\u30fc\u30af\u3067\u5727\u5012\u3057\u307e\u305b\u3093</strong>\u3002",
-  m4k1:"\u30d9\u30e9\u30c9\u30fc\u30e9\u307e\u305f\u306fGlencairn\u3092\u4f7f\u7528",m4k2:"\u30d9\u30bd\u30b9\u3067\u53e3\u306e\u524d\u90e8\u306b\u542b\u3080",m4k3:"\u30d5\u30e9\u30a4\u30c8\u3067\u6bd4\u8f03\u30c6\u30a4\u30b9\u30c6\u30a3\u30f3\u30b0",m4k4:"\u512a\u308c\u305f\u30e1\u30b9\u30ab\u30eb\u306f\u8907\u96d1\u3067\u30d0\u30e9\u30f3\u30b9\u304c\u826f\u3044"
+  m4h3:"\u30e1\u30b9\u30ab\u30eb\u306e\u30da\u30a2\u30ea\u30f3\u30b0",m4p3:"\u30e1\u30b9\u30ab\u30eb\u306f\u5927\u80c6\u306a\u98a8\u5473\u3068\u7d20\u6674\u3089\u3057\u3044\u76f8\u6027\u3002<strong>\u30d6\u30e9\u30f3\u30b3</strong>\u306f\u30d5\u30eb\u30dc\u30c7\u30a3\u306e\u8449\u5dfb\u306b\u3002<strong>\u30ec\u30dd\u30b5\u30c9</strong>\u306f\u30c0\u30fc\u30af\u30c1\u30e7\u30b3\u30ec\u30fc\u30c8\u3001\u30c9\u30e9\u30a4\u30d5\u30eb\u30fc\u30c4\u3001\u719f\u6210\u30c1\u30fc\u30ba\u3068\u3002100%\u30a2\u30ac\u30d9\u3092\u78ba\u8a8d\u3002<strong>\u6700\u9ad8\u306e\u30e1\u30b9\u30ab\u30eb\u306f\u571f\u3001\u679c\u5b9f\u3001\u30df\u30cd\u30e9\u30eb\u306e\u5c64\u3092\u898b\u305b\u3066\u304f\u308c\u307e\u3059</strong>\u3002",
+  m4k1:"\u30d9\u30e9\u30c9\u30fc\u30e9\u307e\u305f\u306fGlencairn\u3067\u30da\u30eb\u30e9\u30b9\u3092\u89b3\u5bdf",m4k2:"\u30d9\u30bd\u30b9\u306e\u6280\u6cd5\u3067\u53e3\u306e\u524d\u90e8\u304b\u3089\u5473\u308f\u3046",m4k3:"\u30d6\u30e9\u30f3\u30b3\u306f\u8449\u5dfb\u306b\u3001\u30ec\u30dd\u30b5\u30c9\u306f\u30c1\u30e7\u30b3\u3068\u30c1\u30fc\u30ba\u306b",m4k4:"\u512a\u308c\u305f\u30e1\u30b9\u30ab\u30eb\u306f\u8907\u96d1\u306a\u5c64\u3092\u660e\u304b\u3059"
 },
 zh: {
   ln:"\u4e2d\u6587",hero_title:"\u6885\u65af\u5361\u5c14\u5927\u5e08\u8bfe",hero_sub:"\u4ece\u8d77\u6e90\u5230\u54c1\u9274\uff0c\u901a\u8fc74\u4e2a\u6c89\u6d78\u5f0f\u6a21\u5757\u63a2\u7d22\u6885\u65af\u5361\u5c14\u7684\u4e16\u754c\u3002",hero_cta:"\u5f00\u59cb\u5b66\u4e60",progress:"\u8fdb\u5ea6",cof:"/ 4 \u5df2\u5b8c\u6210",tkwy:"\u5173\u952e\u8981\u70b9",ref:"\u53c2\u8003\u6587\u732e",ftxt:"\u9ad8\u7aef\u6885\u65af\u5361\u5c14\u4f53\u9a8c\u3002\u6162\u6162\u54c1\u5473\u3002",fcopy:"\u00a9 2026 Bostom Bar.",
@@ -162,17 +162,17 @@ zh: {
   m4t:"\u54c1\u9274\u4e0e\u4eab\u7528",m4d:"\u5982\u4f55\u556e\u996e\u3001\u5173\u6ce8\u4ec0\u4e48\u3002",
   m4h1:"\u9152\u676f\u4e0e\u5012\u9152",m4p1:'\u5728<strong>veladora</strong>\u6216Glencairn\u4e2d\u5012\u5165\u7ea630ml\u3002\u89c2\u5bdf<strong>perlas</strong>\u4f30\u7b97\u9152\u7cbe\u5ea6\u3002\u9759\u7f6e\u51e0\u5206\u949f\u3002',
   m4h2:"Besos\u6280\u5de7",m4p2:'<strong>Besos</strong>\u610f\u4e3a\u201c\u4eb2\u543b\u201d\u3002\u8f7b\u8f7b\u542b\u5165\u53e3\u8154\u524d\u90e8\uff0c\u7136\u540e\u5728\u820c\u5934\u4e0a\u201c\u54c0\u56bc\u201d\u3002\u6ce8\u610f<strong>\u524d\u8c03</strong>\u3001<strong>\u4e2d\u8c03</strong>\u3001<strong>\u4f59\u5473</strong>\u3002',
-  m4h3:"\u5bfb\u627e\u597d\u7684\u6885\u65af\u5361\u5c14",m4p3:"\u5728\u6885\u65af\u5361\u5c14\u9152\u5427\u70b9\u54c1\u9274\u7ec4\u540845-50% ABV\u3002\u770b100%\u9f99\u820c\u5170\u3002<strong>\u6700\u597d\u7684\u6885\u65af\u5361\u5c14\u4e0d\u4f1a\u7528\u70df\u718f\u538b\u5012\u4f60</strong>\u3002",
-  m4k1:"\u4f7f\u7528veladora\u6216Glencairn",m4k2:"\u7528besos\u542b\u5165\u53e3\u8154\u524d\u90e8",m4k3:"\u70b9\u54c1\u9274\u7ec4\u5408\u4ee5\u4fbf\u6bd4\u8f83",m4k4:"\u4f18\u79c0\u6885\u65af\u5361\u5c14\u590d\u6742\u5e73\u8861"
+  m4h3:"\u6885\u65af\u5361\u5c14\u7684\u642d\u914d",m4p3:"\u6885\u65af\u5361\u5c14\u4e0e\u6d53\u90c1\u98ce\u5473\u5b8c\u7f8e\u642d\u914d\u3002<strong>\u5e03\u5170\u79d1</strong>\u9002\u5408\u642d\u914d\u6d53\u90c1\u96ea\u8304\uff1b<strong>\u9648\u5e74</strong>\u9002\u5408\u642d\u914d\u9ed1\u5de7\u514b\u529b\u3001\u5e72\u679c\u548c\u964c\u5e74\u5976\u916a\u3002\u59cb\u7ec8\u786e\u8ba4<strong>100%\u9f99\u820c\u5170</strong>\u3002<strong>\u6700\u597d\u7684\u6885\u65af\u5361\u5c14\u5c55\u73b0\u6ce5\u571f\u3001\u6c34\u679c\u548c\u77ff\u7269\u7684\u5c42\u6b21</strong>\u3002",
+  m4k1:"\u4f7f\u7528veladora\u6216Glencairn\uff0c\u89c2\u5bdfperlas",m4k2:"\u7528besos\u6280\u5de7\u4ece\u53e3\u8154\u524d\u90e8\u5f00\u59cb\u54c1\u5c1d",m4k3:"\u5e03\u5170\u79d1\u914d\u96ea\u8304\uff0c\u9648\u5e74\u914d\u5de7\u514b\u529b\u548c\u5976\u916a",m4k4:"\u4f18\u79c0\u6885\u65af\u5361\u5c14\u5c55\u73b0\u590d\u6742\u5c42\u6b21"
 }
 };
 
 // MODULE IMAGES
 var MODS = [
-  {id:1,pfx:'m1',imgs:['https://www.mezcalistas.com/wp-content/uploads/2015/11/IMG_6903-683x1024.jpg','https://www.mezcalistas.com/wp-content/uploads/2020/06/1-7-768x768.jpg']},
-  {id:2,pfx:'m2',imgs:['https://www.mezcalistas.com/wp-content/uploads/2020/06/1-18-1024x768.jpg','https://www.mezcalistas.com/wp-content/uploads/2019/03/fermentation-tanks-apaluz.jpg','https://www.mezcalistas.com/wp-content/uploads/2023/04/571f7904-a7a8-4994-8033-e12450e442bf-768x432.jpg']},
-  {id:3,pfx:'m3',imgs:['https://www.mezcalistas.com/wp-content/uploads/2020/06/1-1.jpg','https://www.mezcalistas.com/wp-content/uploads/2020/10/2-27.jpg']},
-  {id:4,pfx:'m4',imgs:['https://www.mezcalistas.com/wp-content/uploads/2019/12/La-Luna-Mezcal-7-1024x768.jpg','https://www.mezcalistas.com/wp-content/uploads/2013/04/IMG_0509-768x512.jpg']}
+  {id:1,pfx:'m1',imgs:['https://images.unsplash.com/photo-1569529465841-dfecdab7503b?w=900&q=80','https://images.unsplash.com/photo-1585553616435-2dc51571b7e1?w=900&q=80']},
+  {id:2,pfx:'m2',imgs:['https://images.unsplash.com/photo-1600788886242-5c96aabe3757?w=900&q=80','https://images.unsplash.com/photo-1516594798947-e65505dbb29d?w=900&q=80','https://images.unsplash.com/photo-1604871000636-074fa5117945?w=900&q=80']},
+  {id:3,pfx:'m3',imgs:['https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=900&q=80','https://images.unsplash.com/photo-1551024709-8f23befc6f87?w=900&q=80']},
+  {id:4,pfx:'m4',imgs:['https://images.unsplash.com/photo-1470337458703-46ad1756a187?w=900&q=80','https://images.unsplash.com/photo-1609951651556-5334e2706168?w=900&q=80']}
 ];
 
 var FLAGS = {en:'\ud83c\uddec\ud83c\udde7',es:'\ud83c\uddea\ud83c\uddf8',ja:'\ud83c\uddef\ud83c\uddf5',zh:'\ud83c\udde8\ud83c\uddf3'};
@@ -254,7 +254,7 @@ function App() {
             h('div',{className:'mtitle'},t[p+'t']),
             h('div',{className:'mdesc'},t[p+'d'])
           ),
-          h('span',{className:'mtog'+(isOpen?' open':'')},'\u25be')
+          h('span',{className:'mtog'+(isOpen?' open':'')},'\u203A')
         ),
         h('div',{className:'mbody'+(isOpen?' open':'')},
           h('div',{className:'mcont'},
