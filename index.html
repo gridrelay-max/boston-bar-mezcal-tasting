@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Boston Bar — Mezcal Tasting Masterclass</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap');
+
+  :root {
+    --gold: #C8A86E;
+    --gold-light: #E8D5A8;
+    --dark: #1A1611;
+    --dark-card: #241F18;
+    --dark-surface: #2E2720;
+    --warm-brown: #3D3228;
+    --cream: #F5EDE0;
+    --cream-muted: #BFB39E;
+    --amber: #D4873E;
+    --smoke: #8B7D6B;
+    --green-accent: #7A9B6D;
+    --red-accent: #C45B4A;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--dark);
+    color: var(--cream);
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; width: 100%; z-index: 100;
+    background: rgba(26,22,17,.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(200,168,110,.15);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 2rem; height: 64px;
+  }
+  .nav-brand {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem; font-weight: 700; color: var(--gold);
+    letter-spacing: 2px; text-transform: uppercase;
+  }
+  .nav-brand span { color: var(--cream); font-weight: 400; }
+  .lang-switcher { display: flex; gap: .35rem; }
+  .lang-btn {
+    background: transparent; border: 1px solid var(--smoke);
+    color: var(--cream-muted); padding: .3rem .6rem; border-radius: 4px;
+    font-size: .75rem; cursor: pointer; transition: all .2s;
+    font-family: 'Inter', sans-serif; font-weight: 500;
+  }
+  .lang-btn.active, .lang-btn:hover {
+    background: var(--gold); color: var(--dark); border-color: var(--gold);
+  }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 80vh; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; text-align: center;
+    padding: 8rem 2rem 4rem;
+    background: linear-gradient(180deg, var(--dark) 0%, rgba(61,50,40,.6) 50%, var(--dark) 100%);
+    position: relative;
+  }
+  .hero::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 50% 40%, rgba(200,168,110,.08) 0%, transparent 70%);
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.4rem, 6vw, 4.2rem);
+    font-weight: 700; color: var(--gold); position: relative;
+    margin-bottom: .5rem; letter-spacing: 1px;
+  }
+  .hero .subtitle {
+    font-size: clamp(1rem, 2.5vw, 1.3rem);
+    color: var(--cream-muted); max-width: 600px; position: relative;
+    margin-bottom: 2rem;
+  }
+  .hero .cta {
+    display: inline-block; padding: .85rem 2.4rem;
+    background: var(--gold); color: var(--dark); font-weight: 600;
+    border-radius: 6px; text-decoration: none; font-size: 1rem;
+    transition: all .25s; position: relative; letter-spacing: .5px;
+  }
+  .hero .cta:hover { background: var(--gold-light); transform: translateY(-2px); }
+
+  /* ── PROGRESS ── */
+  .progress-bar {
+    background: var(--dark-card); border-bottom: 1px solid rgba(200,168,110,.1);
+    padding: 1.2rem 2rem; display: flex; align-items: center;
+    justify-content: center; gap: 1rem; flex-wrap: wrap;
+    position: sticky; top: 64px; z-index: 90;
+  }
+  .progress-label { font-size: .8rem; color: var(--smoke); font-weight: 500; }
+  .progress-dots { display: flex; gap: .6rem; }
+  .progress-dot {
+    width: 36px; height: 36px; border-radius: 50%;
+    border: 2px solid var(--smoke); display: flex; align-items: center;
+    justify-content: center; font-size: .75rem; font-weight: 600;
+    color: var(--smoke); cursor: pointer; transition: all .3s;
+    background: transparent;
+  }
+  .progress-dot.completed {
+    background: var(--gold); border-color: var(--gold); color: var(--dark);
+  }
+  .progress-dot.active {
+    border-color: var(--gold); color: var(--gold);
+  }
+  .progress-text { font-size: .8rem; color: var(--cream-muted); }
+
+  /* ── MODULES ── */
+  .module {
+    max-width: 860px; margin: 0 auto; padding: 4rem 2rem;
+  }
+  .module + .module { border-top: 1px solid rgba(200,168,110,.08); }
+  .module-header {
+    display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;
+  }
+  .module-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem; font-weight: 700; color: var(--gold);
+    line-height: 1;
+  }
+  .module-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem; font-weight: 600; color: var(--cream);
+  }
+  .objectives {
+    background: var(--dark-surface); border-left: 3px solid var(--gold);
+    padding: 1rem 1.5rem; border-radius: 0 8px 8px 0; margin-bottom: 2rem;
+  }
+  .objectives-title {
+    font-size: .75rem; text-transform: uppercase; letter-spacing: 1.5px;
+    color: var(--gold); margin-bottom: .5rem; font-weight: 600;
+  }
+  .objectives ul { list-style: none; }
+  .objectives li {
+    padding: .25rem 0; color: var(--cream-muted); font-size: .95rem;
+  }
+  .objectives li::before {
+    content: '◆ '; color: var(--gold); font-size: .6rem; vertical-align: middle;
+    margin-right: .4rem;
+  }
+  .lesson-content h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem; color: var(--gold-light); margin: 1.8rem 0 .6rem;
+  }
+  .lesson-content p {
+    color: var(--cream-muted); margin-bottom: 1rem; font-size: .95rem;
+  }
+  .lesson-content strong { color: var(--cream); }
+  .tip-box {
+    background: rgba(200,168,110,.07); border: 1px solid rgba(200,168,110,.15);
+    border-radius: 8px; padding: 1rem 1.2rem; margin: 1.2rem 0;
+  }
+  .tip-box .tip-label {
+    font-size: .7rem; text-transform: uppercase; letter-spacing: 1.5px;
+    color: var(--amber); font-weight: 600; margin-bottom: .3rem;
+  }
+
+  /* ── QUIZ ── */
+  .quiz {
+    background: var(--dark-surface); border-radius: 10px;
+    padding: 1.5rem; margin-top: 2rem;
+  }
+  .quiz-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem; color: var(--gold); margin-bottom: 1rem;
+  }
+  .quiz-question { margin-bottom: 1.2rem; }
+  .quiz-question p {
+    color: var(--cream); font-size: .95rem; margin-bottom: .6rem; font-weight: 500;
+  }
+  .quiz-option {
+    display: block; width: 100%; text-align: left;
+    background: var(--warm-brown); border: 1px solid rgba(200,168,110,.1);
+    color: var(--cream-muted); padding: .6rem 1rem; margin-bottom: .4rem;
+    border-radius: 6px; cursor: pointer; font-size: .9rem;
+    font-family: 'Inter', sans-serif; transition: all .2s;
+  }
+  .quiz-option:hover { border-color: var(--gold); color: var(--cream); }
+  .quiz-option.correct {
+    background: rgba(122,155,109,.2); border-color: var(--green-accent);
+    color: var(--green-accent);
+  }
+  .quiz-option.incorrect {
+    background: rgba(196,91,74,.15); border-color: var(--red-accent);
+    color: var(--red-accent);
+  }
+  .complete-btn {
+    display: inline-block; margin-top: 1.5rem; padding: .7rem 1.8rem;
+    background: var(--gold); color: var(--dark); border: none;
+    border-radius: 6px; font-weight: 600; cursor: pointer;
+    font-family: 'Inter', sans-serif; font-size: .9rem; transition: all .25s;
+  }
+  .complete-btn:hover { background: var(--gold-light); }
+  .complete-btn:disabled { opacity: .4; cursor: default; }
+
+  /* ── REFERENCES ── */
+  .references {
+    max-width: 860px; margin: 0 auto; padding: 3rem 2rem 2rem;
+    border-top: 1px solid rgba(200,168,110,.08);
+  }
+  .references h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem; color: var(--gold); margin-bottom: 1rem;
+  }
+  .references ol { padding-left: 1.2rem; }
+  .references li {
+    color: var(--cream-muted); font-size: .85rem; margin-bottom: .5rem;
+  }
+  .references a { color: var(--gold); text-decoration: none; }
+  .references a:hover { text-decoration: underline; }
+
+  /* ── FOOTER ── */
+  footer {
+    text-align: center; padding: 3rem 2rem;
+    border-top: 1px solid rgba(200,168,110,.1);
+    background: var(--dark-card);
+  }
+  .footer-brand {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem; font-weight: 700; color: var(--gold);
+    letter-spacing: 2px; margin-bottom: .5rem;
+  }
+  footer p { color: var(--smoke); font-size: .8rem; }
+  footer a { color: var(--gold); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 600px) {
+    nav { padding: 0 1rem; }
+    .module { padding: 3rem 1.2rem; }
+    .progress-bar { padding: 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-brand">Boston <span>Bar</span></div>
+  <div class="lang-switcher">
+    <button class="lang-btn active" onclick="setLang('en')">EN</button>
+    <button class="lang-btn" onclick="setLang('es')">ES</button>
+    <button class="lang-btn" onclick="setLang('ja')">JA</button>
+    <button class="lang-btn" onclick="setLang('zh')">ZH</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <h1 data-i18n="hero_title">Mezcal Tasting Masterclass</h1>
+  <p class="subtitle" data-i18n="hero_subtitle">Learn to taste mezcal like a true connoisseur — from vessel to finish, in 4 guided modules.</p>
+  <a href="#module1" class="cta" data-i18n="hero_cta">Begin the Journey</a>
+</section>
+
+<!-- PROGRESS -->
+<div class="progress-bar">
+  <span class="progress-label" data-i18n="progress_label">Progress</span>
+  <div class="progress-dots">
+    <div class="progress-dot active" data-mod="1" onclick="scrollToMod(1)">1</div>
+    <div class="progress-dot" data-mod="2" onclick="scrollToMod(2)">2</div>
+    <div class="progress-dot" data-mod="3" onclick="scrollToMod(3)">3</div>
+    <div class="progress-dot" data-mod="4" onclick="scrollToMod(4)">4</div>
+  </div>
+  <span class="progress-text" data-i18n="progress_text">0 / 4 completed</span>
+</div>
+
+<!-- MODULE 1 -->
+<section class="module" id="module1">
+  <div class="module-header">
+    <span class="module-number">01</span>
+    <h2 class="module-title" data-i18n="m1_title">The Setup — Vessel, Pour & First Observations</h2>
+  </div>
+  <div class="objectives">
+    <div class="objectives-title" data-i18n="objectives_label">Learning Objectives</div>
+    <ul>
+      <li data-i18n="m1_obj1">Choose the right vessel for tasting mezcal</li>
+      <li data-i18n="m1_obj2">Observe perlas (bubbles) to gauge ABV</li>
+      <li data-i18n="m1_obj3">Understand why resting the pour matters</li>
+    </ul>
+  </div>
+  <div class="lesson-content">
+    <h3 data-i18n="m1_h1">Choosing Your Vessel</h3>
+    <p data-i18n="m1_p1">Pour about 1 oz of mezcal neat into a traditional <strong>veladora</strong> — the small, wide-mouthed glass most commonly used across Mexico. Alternatively, a <strong>Glencairn</strong> whiskey glass works beautifully: its tulip shape concentrates aromatics while letting you swirl without spilling.</p>
+
+    <h3 data-i18n="m1_h2">Reading the Perlas</h3>
+    <p data-i18n="m1_p2">As you pour (or shake the sealed bottle), watch for <strong>perlas</strong> — tiny bubbles that form on the surface. This is how mezcaleros have traditionally gauged the alcohol content. Longer-lasting bubbles generally indicate higher ABV.</p>
+
+    <h3 data-i18n="m1_h3">Let It Breathe</h3>
+    <p data-i18n="m1_p3">Just like wine, oxygen opens up the flavors and aromatics of mezcal, letting the taste stabilize and soften. Give it a few minutes before your first sip. But be careful — too much air will cause mezcal to go flat and watery over time.</p>
+
+    <div class="tip-box">
+      <div class="tip-label" data-i18n="pro_tip">Pro Tip</div>
+      <p data-i18n="m1_tip">When a bottle is less than half full, use a wine preserver spray (nitrogen-based) to displace oxygen and keep your mezcal fresh indefinitely.</p>
+    </div>
+  </div>
+
+  <div class="quiz" id="quiz1">
+    <div class="quiz-title" data-i18n="quiz_title">Quick Check</div>
+    <div class="quiz-question">
+      <p data-i18n="m1_q1">What are "perlas" used to gauge?</p>
+      <button class="quiz-option" data-correct="false" data-i18n="m1_q1a">The age of the mezcal</button>
+      <button class="quiz-option" data-correct="true" data-i18n="m1_q1b">The ABV (alcohol content)</button>
+      <button class="quiz-option" data-correct="false" data-i18n="m1_q1c">The agave species used</button>
+    </div>
+  </div>
+  <button class="complete-btn" onclick="completeModule(1)" data-i18n="complete_btn">Mark Module Complete ✓</button>
+</section>
+
+<!-- MODULE 2 -->
+<section class="module" id="module2">
+  <div class="module-header">
+    <span class="module-number">02</span>
+    <h2 class="module-title" data-i18n="m2_title">The Senses — Smell, Color & Touch</h2>
+  </div>
+  <div class="objectives">
+    <div class="objectives-title" data-i18n="objectives_label">Learning Objectives</div>
+    <ul>
+      <li data-i18n="m2_obj1">Master the swirl-and-smell technique</li>
+      <li data-i18n="m2_obj2">Read color and viscosity for quality cues</li>
+      <li data-i18n="m2_obj3">Learn the traditional "touch" ritual</li>
+    </ul>
+  </div>
+  <div class="lesson-content">
+    <h3 data-i18n="m2_h1">Swirl & Smell</h3>
+    <p data-i18n="m2_p1">Gently swirl the mezcal and observe the <strong>legs</strong> (streams that run down the glass). Hold the vessel level with your nose just above the rim — not plunged inside. Let the aromatics come to you. You'll pick up notes you'd miss by diving in too aggressively.</p>
+
+    <h3 data-i18n="m2_h2">Color & Viscosity</h3>
+    <p data-i18n="m2_p2">Unaged mezcal (joven) should be <strong>crystal clear</strong>. Any color in an unaged expression is a red flag. The legs you observed while swirling often hint at the mouthfeel — thicker legs can suggest a creamier, more viscous spirit.</p>
+
+    <h3 data-i18n="m2_h3">The Touch Ritual</h3>
+    <p data-i18n="m2_p3">In some Mexican traditions, you pour a few drops of mezcal into your palms and rub them together briskly. As the alcohol evaporates, you're left with the pure <strong>essence of the agave</strong> — no stickiness, no residue (since authentic mezcal has no additives).</p>
+  </div>
+
+  <div class="quiz" id="quiz2">
+    <div class="quiz-title" data-i18n="quiz_title">Quick Check</div>
+    <div class="quiz-question">
+      <p data-i18n="m2_q1">What should unaged (joven) mezcal look like?</p>
+      <button class="quiz-option" data-correct="false" data-i18n="m2_q1a">Light amber</button>
+      <button class="quiz-option" data-correct="true" data-i18n="m2_q1b">Crystal clear</button>
+      <button class="quiz-option" data-correct="false" data-i18n="m2_q1c">Slightly golden</button>
+    </div>
+  </div>
+  <button class="complete-btn" onclick="completeModule(2)" data-i18n="complete_btn">Mark Module Complete ✓</button>
+</section>
+
+<!-- MODULE 3 -->
+<section class="module" id="module3">
+  <div class="module-header">
+    <span class="module-number">03</span>
+    <h2 class="module-title" data-i18n="m3_title">The Taste — Besos, Mouthfeel & Flavor</h2>
+  </div>
+  <div class="objectives">
+    <div class="objectives-title" data-i18n="objectives_label">Learning Objectives</div>
+    <ul>
+      <li data-i18n="m3_obj1">Practice the "besos" (kisses) sipping technique</li>
+      <li data-i18n="m3_obj2">Identify front, middle, and finish flavors</li>
+      <li data-i18n="m3_obj3">Evaluate mouthfeel: creamy, oily, bright, crisp</li>
+    </ul>
+  </div>
+  <div class="lesson-content">
+    <h3 data-i18n="m3_h1">Besos — The Art of Kissing Mezcal</h3>
+    <p data-i18n="m3_p1"><strong>Besos</strong> means "kisses" in Spanish. Sip the mezcal gently into the <strong>front of your mouth</strong> first, then "chew" it back over your tongue with control. This prevents the dreaded back-of-throat hit that can overwhelm even experienced drinkers.</p>
+
+    <h3 data-i18n="m3_h2">Tasting the Journey: Front, Middle & Finish</h3>
+    <p data-i18n="m3_p2">Just like wine tasting, pay attention to how the flavor evolves. The <strong>front</strong> is your first impression, the <strong>middle</strong> develops as it spreads across your palate, and the <strong>finish</strong> is what lingers after you swallow. Great mezcal has a long, complex finish.</p>
+
+    <h3 data-i18n="m3_h3">Mouthfeel</h3>
+    <p data-i18n="m3_p3">Is it <strong>creamy, lactic, oily, thick, thin, watery, bright, or crisp</strong>? Your brain cross-references the feel with the taste, so there's a lot going on. Take your time and let each sip tell its story.</p>
+
+    <div class="tip-box">
+      <div class="tip-label" data-i18n="pro_tip">Pro Tip</div>
+      <p data-i18n="m3_tip">Your first sip awakens the palate. Subsequent sips often reveal new flavors. Don't judge a mezcal on the first taste alone.</p>
+    </div>
+  </div>
+
+  <div class="quiz" id="quiz3">
+    <div class="quiz-title" data-i18n="quiz_title">Quick Check</div>
+    <div class="quiz-question">
+      <p data-i18n="m3_q1">What does "besos" mean in mezcal tasting?</p>
+      <button class="quiz-option" data-correct="false" data-i18n="m3_q1a">Breathing deeply before sipping</button>
+      <button class="quiz-option" data-correct="false" data-i18n="m3_q1b">Shaking the bottle vigorously</button>
+      <button class="quiz-option" data-correct="true" data-i18n="m3_q1c">Gently "kissing" the mezcal into the front of the mouth</button>
+    </div>
+  </div>
+  <button class="complete-btn" onclick="completeModule(3)" data-i18n="complete_btn">Mark Module Complete ✓</button>
+</section>
+
+<!-- MODULE 4 -->
+<section class="module" id="module4">
+  <div class="module-header">
+    <span class="module-number">04</span>
+    <h2 class="module-title" data-i18n="m4_title">The Practice — Tasting Notes & Building Your Palate</h2>
+  </div>
+  <div class="objectives">
+    <div class="objectives-title" data-i18n="objectives_label">Learning Objectives</div>
+    <ul>
+      <li data-i18n="m4_obj1">Develop your personal tasting vocabulary</li>
+      <li data-i18n="m4_obj2">Understand what makes mezcal flavors unique (terroir)</li>
+      <li data-i18n="m4_obj3">Know when to taste formally vs. simply enjoy</li>
+    </ul>
+  </div>
+  <div class="lesson-content">
+    <h3 data-i18n="m4_h1">Finding Your Words</h3>
+    <p data-i18n="m4_p1">When tasting, <strong>blurt out the first words that come to mind</strong> — that's probably what you're tasting. "Cranberries," "wet earth," "eucalyptus," "smoke." There's no wrong answer. Over time, as you move through daily life, you'll notice aromas that remind you of mezcals you've tasted.</p>
+
+    <h3 data-i18n="m4_h2">Purity & Terroir</h3>
+    <p data-i18n="m4_p2">Remember: mezcal is <strong>pure</strong>, with no additives. Everything you taste comes from the agave species, where it was grown, the local water source, wild yeast in the air, the fermentation vessel, and the firewood used for roasting and distillation. This is terroir in its most honest form.</p>
+
+    <h3 data-i18n="m4_h3">Formal vs. Relaxed Tasting</h3>
+    <p data-i18n="m4_p3">Sometimes you want to analyze every note. Other times, you just want to follow the basic steps (pour, smell, besos) and kick back. You <strong>know</strong> you love a mezcal when you find yourself mindlessly reaching for that copita again and again. Both approaches are valid — match your style to the moment.</p>
+
+    <div class="tip-box">
+      <div class="tip-label" data-i18n="pro_tip">Pro Tip</div>
+      <p data-i18n="m4_tip">Keep a tasting journal or use mezcalreviews.com to track your favorites. Your palate will evolve, and it's rewarding to look back on your journey.</p>
+    </div>
+  </div>
+
+  <div class="quiz" id="quiz4">
+    <div class="quiz-title" data-i18n="quiz_title">Quick Check</div>
+    <div class="quiz-question">
+      <p data-i18n="m4_q1">Why does each mezcal taste unique?</p>
+      <button class="quiz-option" data-correct="false" data-i18n="m4_q1a">Different additives and flavorings</button>
+      <button class="quiz-option" data-correct="true" data-i18n="m4_q1b">Agave species, terroir, water, yeast, and production methods</button>
+      <button class="quiz-option" data-correct="false" data-i18n="m4_q1c">Barrel aging variations</button>
+    </div>
+  </div>
+  <button class="complete-btn" onclick="completeModule(4)" data-i18n="complete_btn">Mark Module Complete ✓</button>
+</section>
+
+<!-- REFERENCES -->
+<section class="references">
+  <h2 data-i18n="ref_title">References</h2>
+  <ol>
+    <li>Fuego y Humo — <em>Advanced Guide to Drinking Mezcal: How to Taste Mezcal in 13 Steps</em>. <a href="https://fuegoyhumo.com/blogs/education/advanced-guide-to-drinking-mezcal" target="_blank">fuegoyhumo.com</a></li>
+    <li>Boston Bar — Business Profile. <a href="https://share.google/9KIeDQDgrd4nrPywb" target="_blank">Google Business</a></li>
+  </ol>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">BOSTON BAR</div>
+  <p data-i18n="footer_text">A premium mezcal experience. Sip it, don't shoot it.</p>
+  <p style="margin-top:.8rem;">
+    <a href="https://share.google/9KIeDQDgrd4nrPywb" target="_blank" data-i18n="footer_link">Visit Boston Bar →</a>
+  </p>
+  <p style="margin-top:1.5rem; font-size:.7rem; color:var(--smoke);">© 2026 Boston Bar. All rights reserved.</p>
+</footer>
+
+<script>
+// ── i18n translations ──
+const T = {
+en: {
+  hero_title: "Mezcal Tasting Masterclass",
+  hero_subtitle: "Learn to taste mezcal like a true connoisseur — from vessel to finish, in 4 guided modules.",
+  hero_cta: "Begin the Journey",
+  progress_label: "Progress",
+  progress_text: "0 / 4 completed",
+  objectives_label: "Learning Objectives",
+  pro_tip: "Pro Tip",
+  quiz_title: "Quick Check",
+  complete_btn: "Mark Module Complete ✓",
+  ref_title: "References",
+  footer_text: "A premium mezcal experience. Sip it, don't shoot it.",
+  footer_link: "Visit Boston Bar →",
+  m1_title: "The Setup — Vessel, Pour & First Observations",
+  m1_obj1: "Choose the right vessel for tasting mezcal",
+  m1_obj2: "Observe perlas (bubbles) to gauge ABV",
+  m1_obj3: "Understand why resting the pour matters",
+  m1_h1: "Choosing Your Vessel",
+  m1_p1: "Pour about 1 oz of mezcal neat into a traditional <strong>veladora</strong> — the small, wide-mouthed glass most commonly used across Mexico. Alternatively, a <strong>Glencairn</strong> whiskey glass works beautifully: its tulip shape concentrates aromatics while letting you swirl without spilling.",
+  m1_h2: "Reading the Perlas",
+  m1_p2: "As you pour (or shake the sealed bottle), watch for <strong>perlas</strong> — tiny bubbles that form on the surface. This is how mezcaleros have traditionally gauged the alcohol content. Longer-lasting bubbles generally indicate higher ABV.",
+  m1_h3: "Let It Breathe",
+  m1_p3: "Just like wine, oxygen opens up the flavors and aromatics of mezcal, letting the taste stabilize and soften. Give it a few minutes before your first sip. But be careful — too much air will cause mezcal to go flat and watery over time.",
+  m1_tip: "When a bottle is less than half full, use a wine preserver spray (nitrogen-based) to displace oxygen and keep your mezcal fresh indefinitely.",
+  m1_q1: "What are \"perlas\" used to gauge?",
+  m1_q1a: "The age of the mezcal",
+  m1_q1b: "The ABV (alcohol content)",
+  m1_q1c: "The agave species used",
+  m2_title: "The Senses — Smell, Color & Touch",
+  m2_obj1: "Master the swirl-and-smell technique",
+  m2_obj2: "Read color and viscosity for quality cues",
+  m2_obj3: "Learn the traditional \"touch\" ritual",
+  m2_h1: "Swirl & Smell",
+  m2_p1: "Gently swirl the mezcal and observe the <strong>legs</strong> (streams that run down the glass). Hold the vessel level with your nose just above the rim — not plunged inside. Let the aromatics come to you. You'll pick up notes you'd miss by diving in too aggressively.",
+  m2_h2: "Color & Viscosity",
+  m2_p2: "Unaged mezcal (joven) should be <strong>crystal clear</strong>. Any color in an unaged expression is a red flag. The legs you observed while swirling often hint at the mouthfeel — thicker legs can suggest a creamier, more viscous spirit.",
+  m2_h3: "The Touch Ritual",
+  m2_p3: "In some Mexican traditions, you pour a few drops of mezcal into your palms and rub them together briskly. As the alcohol evaporates, you're left with the pure <strong>essence of the agave</strong> — no stickiness, no residue (since authentic mezcal has no additives).",
+  m2_q1: "What should unaged (joven) mezcal look like?",
+  m2_q1a: "Light amber",
+  m2_q1b: "Crystal clear",
+  m2_q1c: "Slightly golden",
+  m3_title: "The Taste — Besos, Mouthfeel & Flavor",
+  m3_obj1: "Practice the \"besos\" (kisses) sipping technique",
+  m3_obj2: "Identify front, middle, and finish flavors",
+  m3_obj3: "Evaluate mouthfeel: creamy, oily, bright, crisp",
+  m3_h1: "Besos — The Art of Kissing Mezcal",
+  m3_p1: "<strong>Besos</strong> means \"kisses\" in Spanish. Sip the mezcal gently into the <strong>front of your mouth</strong> first, then \"chew\" it back over your tongue with control. This prevents the dreaded back-of-throat hit that can overwhelm even experienced drinkers.",
+  m3_h2: "Tasting the Journey: Front, Middle & Finish",
+  m3_p2: "Just like wine tasting, pay attention to how the flavor evolves. The <strong>front</strong> is your first impression, the <strong>middle</strong> develops as it spreads across your palate, and the <strong>finish</strong> is what lingers after you swallow. Great mezcal has a long, complex finish.",
+  m3_h3: "Mouthfeel",
+  m3_p3: "Is it <strong>creamy, lactic, oily, thick, thin, watery, bright, or crisp</strong>? Your brain cross-references the feel with the taste, so there's a lot going on. Take your time and let each sip tell its story.",
+  m3_tip: "Your first sip awakens the palate. Subsequent sips often reveal new flavors. Don't judge a mezcal on the first taste alone.",
+  m3_q1: "What does \"besos\" mean in mezcal tasting?",
+  m3_q1a: "Breathing deeply before sipping",
+  m3_q1b: "Shaking the bottle vigorously",
+  m3_q1c: "Gently \"kissing\" the mezcal into the front of the mouth",
+  m4_title: "The Practice — Tasting Notes & Building Your Palate",
+  m4_obj1: "Develop your personal tasting vocabulary",
+  m4_obj2: "Understand what makes mezcal flavors unique (terroir)",
+  m4_obj3: "Know when to taste formally vs. simply enjoy",
+  m4_h1: "Finding Your Words",
+  m4_p1: "When tasting, <strong>blurt out the first words that come to mind</strong> — that's probably what you're tasting. \"Cranberries,\" \"wet earth,\" \"eucalyptus,\" \"smoke.\" There's no wrong answer. Over time, as you move through daily life, you'll notice aromas that remind you of mezcals you've tasted.",
+  m4_h2: "Purity & Terroir",
+  m4_p2: "Remember: mezcal is <strong>pure</strong>, with no additives. Everything you taste comes from the agave species, where it was grown, the local water source, wild yeast in the air, the fermentation vessel, and the firewood used for roasting and distillation. This is terroir in its most honest form.",
+  m4_h3: "Formal vs. Relaxed Tasting",
+  m4_p3: "Sometimes you want to analyze every note. Other times, you just want to follow the basic steps (pour, smell, besos) and kick back. You <strong>know</strong> you love a mezcal when you find yourself mindlessly reaching for that copita again and again. Both approaches are valid — match your style to the moment.",
+  m4_tip: "Keep a tasting journal or use mezcalreviews.com to track your favorites. Your palate will evolve, and it's rewarding to look back on your journey.",
+  m4_q1: "Why does each mezcal taste unique?",
+  m4_q1a: "Different additives and flavorings",
+  m4_q1b: "Agave species, terroir, water, yeast, and production methods",
+  m4_q1c: "Barrel aging variations"
+},
+es: {
+  hero_title: "Masterclass de Cata de Mezcal",
+  hero_subtitle: "Aprende a degustar mezcal como un verdadero conocedor — del vaso al final, en 4 módulos guiados.",
+  hero_cta: "Comenzar el Viaje",
+  progress_label: "Progreso",
+  progress_text: "0 / 4 completados",
+  objectives_label: "Objetivos de Aprendizaje",
+  pro_tip: "Consejo Pro",
+  quiz_title: "Verificación Rápida",
+  complete_btn: "Marcar Módulo Completo ✓",
+  ref_title: "Referencias",
+  footer_text: "Una experiencia premium de mezcal. Sorbéalo, no lo dispare.",
+  footer_link: "Visitar Boston Bar →",
+  m1_title: "La Preparación — Vaso, Servicio y Primeras Observaciones",
+  m1_obj1: "Elegir el vaso adecuado para degustar mezcal",
+  m1_obj2: "Observar las perlas (burbujas) para estimar el ABV",
+  m1_obj3: "Entender por qué importa dejar reposar el servicio",
+  m1_h1: "Elegir tu Vaso",
+  m1_p1: "Sirve aproximadamente 30 ml de mezcal solo en una <strong>veladora</strong> tradicional — el vaso pequeño de boca ancha más usado en México. Alternativamente, un vaso <strong>Glencairn</strong> de whiskey funciona muy bien: su forma de tulipán concentra los aromas y permite agitar sin derramar.",
+  m1_h2: "Leer las Perlas",
+  m1_p2: "Al servir (o agitar la botella cerrada), observa las <strong>perlas</strong> — pequeñas burbujas que se forman en la superficie. Así es como los mezcaleros han medido tradicionalmente el contenido alcohólico. Burbujas más duraderas generalmente indican mayor ABV.",
+  m1_h3: "Déjalo Respirar",
+  m1_p3: "Al igual que el vino, el oxígeno abre los sabores y aromas del mezcal, permitiendo que el sabor se estabilice y suavice. Dale unos minutos antes del primer sorbo. Pero cuidado — demasiado aire hará que el mezcal se vuelva aguado con el tiempo.",
+  m1_tip: "Cuando una botella está menos de la mitad llena, usa un spray preservador de vino (a base de nitrógeno) para desplazar el oxígeno y mantener tu mezcal fresco indefinidamente.",
+  m1_q1: "¿Para qué se usan las \"perlas\"?",
+  m1_q1a: "La edad del mezcal",
+  m1_q1b: "El ABV (contenido alcohólico)",
+  m1_q1c: "La especie de agave utilizada",
+  m2_title: "Los Sentidos — Olfato, Color y Tacto",
+  m2_obj1: "Dominar la técnica de agitar y oler",
+  m2_obj2: "Leer el color y la viscosidad como indicadores de calidad",
+  m2_obj3: "Aprender el ritual tradicional del \"tacto\"",
+  m2_h1: "Agitar y Oler",
+  m2_p1: "Agita suavemente el mezcal y observa las <strong>piernas</strong> (hilos que bajan por el vaso). Mantén el vaso a nivel con la nariz justo encima del borde — no sumergida dentro. Deja que los aromas vengan a ti.",
+  m2_h2: "Color y Viscosidad",
+  m2_p2: "El mezcal joven (sin añejar) debe ser <strong>cristalino</strong>. Cualquier color en una expresión sin añejar es una señal de alerta. Las piernas que observaste a menudo dan pistas sobre la sensación en boca.",
+  m2_h3: "El Ritual del Tacto",
+  m2_p3: "En algunas tradiciones mexicanas, viertes unas gotas de mezcal en tus palmas y las frotas enérgicamente. Al evaporarse el alcohol, queda la <strong>esencia pura del agave</strong> — sin pegajosidad ni residuos.",
+  m2_q1: "¿Cómo debería verse el mezcal joven (sin añejar)?",
+  m2_q1a: "Ámbar claro",
+  m2_q1b: "Cristalino",
+  m2_q1c: "Ligeramente dorado",
+  m3_title: "El Sabor — Besos, Sensación en Boca y Sabor",
+  m3_obj1: "Practicar la técnica de sorbo \"besos\"",
+  m3_obj2: "Identificar sabores de entrada, medio y final",
+  m3_obj3: "Evaluar la sensación en boca: cremosa, aceitosa, brillante, fresca",
+  m3_h1: "Besos — El Arte de Besar el Mezcal",
+  m3_p1: "<strong>Besos</strong> se refiere a sorber suavemente el mezcal hacia la <strong>parte frontal de la boca</strong> primero, luego \"masticarlo\" hacia atrás sobre la lengua con control. Esto evita el golpe en la garganta que abruma incluso a bebedores experimentados.",
+  m3_h2: "El Viaje del Sabor: Entrada, Medio y Final",
+  m3_p2: "Como en la cata de vinos, presta atención a cómo evoluciona el sabor. La <strong>entrada</strong> es tu primera impresión, el <strong>medio</strong> se desarrolla al extenderse por tu paladar, y el <strong>final</strong> es lo que perdura después de tragar.",
+  m3_h3: "Sensación en Boca",
+  m3_p3: "¿Es <strong>cremoso, láctico, aceitoso, grueso, delgado, aguado, brillante o fresco</strong>? Tu cerebro cruza la sensación con el sabor. Tómate tu tiempo.",
+  m3_tip: "Tu primer sorbo despierta el paladar. Los sorbos siguientes revelan nuevos sabores. No juzgues un mezcal solo por el primer trago.",
+  m3_q1: "¿Qué significa \"besos\" en la cata de mezcal?",
+  m3_q1a: "Respirar profundamente antes de sorber",
+  m3_q1b: "Agitar la botella vigorosamente",
+  m3_q1c: "\"Besar\" suavemente el mezcal hacia la parte frontal de la boca",
+  m4_title: "La Práctica — Notas de Cata y Desarrollar tu Paladar",
+  m4_obj1: "Desarrollar tu vocabulario personal de cata",
+  m4_obj2: "Entender qué hace únicos los sabores del mezcal (terroir)",
+  m4_obj3: "Saber cuándo catar formalmente vs. simplemente disfrutar",
+  m4_h1: "Encontrar tus Palabras",
+  m4_p1: "Al degustar, <strong>di las primeras palabras que vengan a tu mente</strong> — probablemente eso es lo que estás saboreando. \"Arándanos\", \"tierra húmeda\", \"eucalipto\", \"humo\". No hay respuesta incorrecta.",
+  m4_h2: "Pureza y Terroir",
+  m4_p2: "Recuerda: el mezcal es <strong>puro</strong>, sin aditivos. Todo lo que saboreas proviene de la especie de agave, dónde creció, la fuente de agua local, la levadura silvestre, el recipiente de fermentación y la leña utilizada.",
+  m4_h3: "Cata Formal vs. Relajada",
+  m4_p3: "A veces quieres analizar cada nota. Otras veces, solo quieres seguir los pasos básicos y relajarte. <strong>Sabes</strong> que amas un mezcal cuando te descubres alcanzando esa copita una y otra vez.",
+  m4_tip: "Lleva un diario de cata o usa mezcalreviews.com para rastrear tus favoritos. Tu paladar evolucionará.",
+  m4_q1: "¿Por qué cada mezcal sabe único?",
+  m4_q1a: "Diferentes aditivos y saborizantes",
+  m4_q1b: "Especie de agave, terroir, agua, levadura y métodos de producción",
+  m4_q1c: "Variaciones en el envejecimiento en barrica"
+},
+ja: {
+  hero_title: "メスカル テイスティング マスタークラス",
+  hero_subtitle: "グラスからフィニッシュまで、4つのモジュールで本物の鑑定家のようにメスカルを味わう方法を学びましょう。",
+  hero_cta: "旅を始める",
+  progress_label: "進捗",
+  progress_text: "0 / 4 完了",
+  objectives_label: "学習目標",
+  pro_tip: "プロのヒント",
+  quiz_title: "クイックチェック",
+  complete_btn: "モジュール完了 ✓",
+  ref_title: "参考文献",
+  footer_text: "プレミアムなメスカル体験。ショットではなく、ゆっくり味わって。",
+  footer_link: "Boston Barを訪問 →",
+  m1_title: "準備 — グラス、注ぎ方、最初の観察",
+  m1_obj1: "メスカルのテイスティングに適したグラスを選ぶ",
+  m1_obj2: "ペルラス（泡）を観察してABVを推定する",
+  m1_obj3: "注いだ後に休ませることの重要性を理解する",
+  m1_h1: "グラスを選ぶ",
+  m1_p1: "伝統的な<strong>ベラドーラ</strong>（メキシコで最も一般的な小さな広口グラス）にメスカルを約30mlストレートで注ぎます。代わりに<strong>グレンケアン</strong>ウイスキーグラスも最適です。チューリップ型がアロマを集中させます。",
+  m1_h2: "ペルラスを読む",
+  m1_p2: "注ぐ時（または密封したボトルを振る時）、表面に形成される小さな泡 — <strong>ペルラス</strong>を観察してください。メスカレロが伝統的にアルコール度数を測る方法です。泡が長く残るほど、一般的にABVが高いことを示します。",
+  m1_h3: "呼吸させる",
+  m1_p3: "ワインと同様に、酸素がメスカルの風味とアロマを開き、味を安定させ柔らかくします。最初の一口の前に数分間置いてください。ただし、空気に触れすぎると水っぽくなります。",
+  m1_tip: "ボトルが半分以下になったら、ワイン保存スプレー（窒素ベース）を使って酸素を遮断し、メスカルを無期限に新鮮に保ちましょう。",
+  m1_q1: "「ペルラス」は何を測るために使われますか？",
+  m1_q1a: "メスカルの熟成年数",
+  m1_q1b: "ABV（アルコール度数）",
+  m1_q1c: "使用されたアガベの種類",
+  m2_title: "五感 — 香り、色、触感",
+  m2_obj1: "スワール＆スメル技法をマスターする",
+  m2_obj2: "色と粘度から品質の手がかりを読み取る",
+  m2_obj3: "伝統的な「触感」の儀式を学ぶ",
+  m2_h1: "スワール＆スメル",
+  m2_p1: "メスカルを優しくスワールし、<strong>レッグス</strong>（グラスを流れ落ちる筋）を観察します。グラスを水平に保ち、鼻を縁のすぐ上に — 中に突っ込まないでください。",
+  m2_h2: "色と粘度",
+  m2_p2: "熟成していないメスカル（ホベン）は<strong>透明</strong>でなければなりません。熟成していない表現に色がある場合は要注意です。",
+  m2_h3: "触感の儀式",
+  m2_p3: "メキシコの伝統では、手のひらにメスカルを数滴垂らし、素早くこすり合わせます。アルコールが蒸発すると、<strong>アガベの純粋なエッセンス</strong>が残ります。",
+  m2_q1: "熟成していない（ホベン）メスカルはどのように見えるべきですか？",
+  m2_q1a: "薄い琥珀色",
+  m2_q1b: "透明",
+  m2_q1c: "やや金色",
+  m3_title: "味わい — ベソス、マウスフィール、フレーバー",
+  m3_obj1: "「ベソス」（キス）の飲み方を練習する",
+  m3_obj2: "フロント、ミドル、フィニッシュのフレーバーを識別する",
+  m3_obj3: "マウスフィールを評価する：クリーミー、オイリー、ブライト、クリスプ",
+  m3_h1: "ベソス — メスカルにキスする技法",
+  m3_p1: "<strong>ベソス</strong>はスペイン語で「キス」を意味します。メスカルを<strong>口の前部</strong>に優しく含み、舌の上でコントロールしながら「噛む」ように後方に送ります。",
+  m3_h2: "味の旅：フロント、ミドル、フィニッシュ",
+  m3_p2: "ワインテイスティングと同様に、風味がどう変化するかに注目してください。<strong>フロント</strong>は第一印象、<strong>ミドル</strong>はパレット全体に広がる展開、<strong>フィニッシュ</strong>は飲み込んだ後の余韻です。",
+  m3_h3: "マウスフィール",
+  m3_p3: "<strong>クリーミー、乳酸的、オイリー、厚い、薄い、水っぽい、ブライト、クリスプ</strong>のどれですか？脳は感触と味を相互参照しています。",
+  m3_tip: "最初の一口はパレットを目覚めさせます。次の一口で新しい風味が現れることが多いです。最初の味だけでメスカルを判断しないでください。",
+  m3_q1: "メスカルテイスティングで「ベソス」とは何を意味しますか？",
+  m3_q1a: "飲む前に深呼吸する",
+  m3_q1b: "ボトルを激しく振る",
+  m3_q1c: "メスカルを口の前部に優しく「キス」するように含む",
+  m4_title: "実践 — テイスティングノートとパレットの構築",
+  m4_obj1: "個人的なテイスティング語彙を開発する",
+  m4_obj2: "メスカルの風味をユニークにする要因（テロワール）を理解する",
+  m4_obj3: "フォーマルなテイスティングと楽しむだけの時を使い分ける",
+  m4_h1: "言葉を見つける",
+  m4_p1: "テイスティング時、<strong>最初に思い浮かんだ言葉を口に出してください</strong> — それがおそらくあなたが味わっているものです。「クランベリー」「湿った土」「ユーカリ」「スモーク」。間違った答えはありません。",
+  m4_h2: "純粋さとテロワール",
+  m4_p2: "覚えておいてください：メスカルは添加物なしの<strong>純粋</strong>なものです。味わうすべてはアガベの種類、産地、地元の水源、空気中の野生酵母、発酵容器、焙煎・蒸留に使う薪に由来します。",
+  m4_h3: "フォーマル vs. リラックス テイスティング",
+  m4_p3: "すべてのノートを分析したい時もあれば、基本ステップだけでリラックスしたい時もあります。何度もコピータに手が伸びる時、それが<strong>本当に好きな</strong>メスカルです。",
+  m4_tip: "テイスティングジャーナルをつけるか、mezcalreviews.comでお気に入りを記録しましょう。パレットは進化します。",
+  m4_q1: "なぜ各メスカルの味はユニークなのですか？",
+  m4_q1a: "異なる添加物とフレーバー",
+  m4_q1b: "アガベの種類、テロワール、水、酵母、製造方法",
+  m4_q1c: "樽熟成のバリエーション"
+},
+zh: {
+  hero_title: "梅斯卡尔品鉴大师课",
+  hero_subtitle: "从酒杯到余味，通过4个引导模块学习像真正的鉴赏家一样品鉴梅斯卡尔。",
+  hero_cta: "开始旅程",
+  progress_label: "进度",
+  progress_text: "0 / 4 已完成",
+  objectives_label: "学习目标",
+  pro_tip: "专业提示",
+  quiz_title: "快速检查",
+  complete_btn: "标记模块完成 ✓",
+  ref_title: "参考文献",
+  footer_text: "高端梅斯卡尔体验。慢慢品味，不要一口干掉。",
+  footer_link: "访问 Boston Bar →",
+  m1_title: "准备 — 酒杯、倒酒和初步观察",
+  m1_obj1: "选择适合品鉴梅斯卡尔的酒杯",
+  m1_obj2: "观察珍珠泡（perlas）来估算酒精度",
+  m1_obj3: "理解为什么倒酒后需要静置",
+  m1_h1: "选择你的酒杯",
+  m1_p1: "将约30毫升纯梅斯卡尔倒入传统的<strong>veladora</strong>——墨西哥最常用的小型宽口玻璃杯。<strong>Glencairn</strong>威士忌杯也是很好的选择：郁金香形状能集中香气。",
+  m1_h2: "读懂珍珠泡",
+  m1_p2: "倒酒时（或摇晃密封瓶时），观察表面形成的小气泡——<strong>perlas</strong>。这是梅斯卡尔制作者传统上测量酒精含量的方法。气泡持续时间越长，通常表示酒精度越高。",
+  m1_h3: "让它呼吸",
+  m1_p3: "就像葡萄酒一样，氧气会打开梅斯卡尔的风味和香气，使味道稳定和柔和。第一口之前等几分钟。但要小心——过多的空气会使梅斯卡尔变得寡淡。",
+  m1_tip: "当瓶子不到半满时，使用葡萄酒保鲜喷雾（氮气基础）来置换氧气，无限期保持梅斯卡尔新鲜。",
+  m1_q1: ""珍珠泡"（perlas）用来测量什么？",
+  m1_q1a: "梅斯卡尔的年份",
+  m1_q1b: "酒精度（ABV）",
+  m1_q1c: "使用的龙舌兰品种",
+  m2_title: "感官 — 嗅觉、颜色和触感",
+  m2_obj1: "掌握摇杯闻香技巧",
+  m2_obj2: "通过颜色和粘度判断品质",
+  m2_obj3: "学习传统的"触感"仪式",
+  m2_h1: "摇杯闻香",
+  m2_p1: "轻轻旋转梅斯卡尔，观察<strong>挂杯</strong>（沿杯壁流下的液柱）。将杯子保持水平，鼻子在杯口上方——不要深入杯中。让香气自然飘来。",
+  m2_h2: "颜色和粘度",
+  m2_p2: "未陈年的梅斯卡尔（joven）应该是<strong>清澈透明</strong>的。未陈年酒液中的任何颜色都是警示信号。",
+  m2_h3: "触感仪式",
+  m2_p3: "在一些墨西哥传统中，将几滴梅斯卡尔倒在手掌上快速搓揉。酒精蒸发后，留下的是<strong>龙舌兰的纯粹精华</strong>——没有粘腻感。",
+  m2_q1: "未陈年（joven）梅斯卡尔应该是什么样的？",
+  m2_q1a: "淡琥珀色",
+  m2_q1b: "清澈透明",
+  m2_q1c: "微微金色",
+  m3_title: "品味 — Besos、口感和风味",
+  m3_obj1: "练习"besos"（亲吻）啜饮技巧",
+  m3_obj2: "识别前调、中调和余味",
+  m3_obj3: "评估口感：奶油般、油润、明亮、清脆",
+  m3_h1: "Besos — 亲吻梅斯卡尔的艺术",
+  m3_p1: "<strong>Besos</strong>在西班牙语中意为"亲吻"。先将梅斯卡尔轻轻含入<strong>口腔前部</strong>，然后有控制地在舌头上"咀嚼"。这可以避免直击喉咙的冲击感。",
+  m3_h2: "味道之旅：前调、中调和余味",
+  m3_p2: "就像品酒一样，关注风味的演变。<strong>前调</strong>是第一印象，<strong>中调</strong>在口腔中展开，<strong>余味</strong>是吞咽后的持久感受。",
+  m3_h3: "口感",
+  m3_p3: "是<strong>奶油般的、乳酸的、油润的、厚重的、轻薄的、水感的、明亮的还是清脆的</strong>？你的大脑会交叉对比感觉和味道。",
+  m3_tip: "第一口唤醒味蕾。后续的啜饮往往会揭示新的风味。不要仅凭第一口就评判一款梅斯卡尔。",
+  m3_q1: "在梅斯卡尔品鉴中"besos"是什么意思？",
+  m3_q1a: "啜饮前深呼吸",
+  m3_q1b: "用力摇晃酒瓶",
+  m3_q1c: "将梅斯卡尔轻轻"亲吻"入口腔前部",
+  m4_title: "实践 — 品鉴笔记和培养味觉",
+  m4_obj1: "建立个人品鉴词汇",
+  m4_obj2: "理解是什么让梅斯卡尔风味独特（风土）",
+  m4_obj3: "知道何时正式品鉴vs简单享用",
+  m4_h1: "找到你的语言",
+  m4_p1: "品鉴时，<strong>脱口而出第一个想到的词</strong>——那可能就是你品尝到的。"蔓越莓""湿润的泥土""桉树""烟熏"。没有错误答案。",
+  m4_h2: "纯净与风土",
+  m4_p2: "记住：梅斯卡尔是<strong>纯净</strong>的，没有添加剂。你品尝到的一切都来自龙舌兰品种、产地、当地水源、空气中的野生酵母、发酵容器和用于烘烤蒸馏的木柴。",
+  m4_h3: "正式 vs. 休闲品鉴",
+  m4_p3: "有时你想分析每一个味道。有时你只想按基本步骤做然后放松享受。当你发现自己不自觉地一次又一次伸手去拿那个copita时，你就<strong>知道</strong>你爱上了这款梅斯卡尔。",
+  m4_tip: "保持品鉴日记或使用mezcalreviews.com记录你的收藏。你的味觉会不断进化。",
+  m4_q1: "为什么每款梅斯卡尔的味道都是独特的？",
+  m4_q1a: "不同的添加剂和调味料",
+  m4_q1b: "龙舌兰品种、风土、水源、酵母和生产方法",
+  m4_q1c: "桶陈变化"
+}
+};
+
+let currentLang = 'en';
+let completed = new Set();
+
+function setLang(lang) {
+  currentLang = lang;
+  document.documentElement.lang = lang;
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.textContent.trim().toLowerCase() === lang));
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (T[lang] && T[lang][key]) {
+      if (el.tagName === 'INPUT' || el.tagName === 'BUTTON' && !el.classList.contains('quiz-option')) {
+        el.textContent = T[lang][key];
+      } else {
+        el.innerHTML = T[lang][key];
+      }
+    }
+  });
+  updateProgress();
+}
+
+function updateProgress() {
+  const t = T[currentLang];
+  const txt = document.querySelector('.progress-text');
+  if (txt && t) txt.textContent = t.progress_text.replace('0', completed.size);
+  document.querySelectorAll('.progress-dot').forEach(d => {
+    const m = parseInt(d.dataset.mod);
+    d.classList.toggle('completed', completed.has(m));
+    d.classList.toggle('active', !completed.has(m) && m === nextIncomplete());
+  });
+}
+
+function nextIncomplete() {
+  for (let i = 1; i <= 4; i++) if (!completed.has(i)) return i;
+  return 0;
+}
+
+function completeModule(n) {
+  completed.add(n);
+  updateProgress();
+}
+
+function scrollToMod(n) {
+  document.getElementById('module' + n)?.scrollIntoView({ behavior: 'smooth' });
+}
+
+// Quiz logic
+document.querySelectorAll('.quiz-option').forEach(btn => {
+  btn.addEventListener('click', function() {
+    const siblings = this.parentElement.querySelectorAll('.quiz-option');
+    const already = [...siblings].some(s => s.classList.contains('correct') || s.classList.contains('incorrect'));
+    if (already) return;
+    siblings.forEach(s => {
+      if (s.dataset.correct === 'true') s.classList.add('correct');
+      else s.classList.add('incorrect');
+    });
+  });
+});
+</script>
+</body>
+</html>
