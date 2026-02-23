@@ -4,482 +4,309 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Bostom Bar — Mezcal Masterclass</title>
-<script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
-<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
-<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.3.1/umd/react.production.min.js" crossorigin></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.3.1/umd/react-dom.production.min.js" crossorigin></script>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap');
 :root{--gold:#C8A86E;--gold-light:#E8D5A8;--dark:#1A1611;--dark-card:#241F18;--dark-surface:#2E2720;--warm-brown:#3D3228;--cream:#F5EDE0;--cream-muted:#BFB39E;--amber:#D4873E;--smoke:#8B7D6B;--green:#7A9B6D}
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:'Inter',sans-serif;background:var(--dark);color:var(--cream);line-height:1.7;overflow-x:hidden}
-/* NAV */
-nav{position:fixed;top:0;width:100%;z-index:100;background:rgba(26,22,17,.95);backdrop-filter:blur(12px);border-bottom:1px solid rgba(200,168,110,.15);display:flex;align-items:center;justify-content:space-between;padding:0 2rem;height:64px}
+nav{position:fixed;top:0;width:100%;z-index:100;background:rgba(26,22,17,.96);backdrop-filter:blur(12px);border-bottom:1px solid rgba(200,168,110,.15);display:flex;align-items:center;justify-content:space-between;padding:0 2rem;height:64px}
 .nav-brand img{height:32px}
-.nav-links{display:flex;gap:1.2rem;align-items:center}
-.nav-link{background:none;border:none;color:var(--cream-muted);font-family:'Inter',sans-serif;font-size:.85rem;cursor:pointer;transition:color .2s;padding:.3rem 0;border-bottom:2px solid transparent}
+.nav-links{display:flex;gap:1rem;align-items:center}
+.nav-link{background:none;border:none;color:var(--cream-muted);font-family:'Inter',sans-serif;font-size:.82rem;cursor:pointer;transition:color .2s;padding:.3rem 0;border-bottom:2px solid transparent}
 .nav-link:hover,.nav-link.active{color:var(--gold);border-bottom-color:var(--gold)}
-.nav-link .check{color:var(--green);margin-left:.3rem;font-size:.75rem}
-.lang-switcher{display:flex;gap:.4rem;flex-wrap:wrap}
-.lang-btn{background:transparent;border:1px solid var(--smoke);color:var(--cream-muted);padding:.35rem .7rem;border-radius:5px;font-size:.78rem;cursor:pointer;transition:all .2s;font-family:'Inter',sans-serif;display:flex;align-items:center;gap:.35rem}
-.lang-btn.active,.lang-btn:hover{background:var(--gold);color:var(--dark);border-color:var(--gold)}
-/* HERO */
-.hero{min-height:80vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:8rem 2rem 4rem;background:linear-gradient(180deg,var(--dark) 0%,rgba(61,50,40,.6) 50%,var(--dark) 100%);position:relative}
+.nav-check{color:var(--green);margin-left:.3rem;font-size:.7rem}
+.lang-sw{display:flex;gap:.35rem;flex-wrap:wrap}
+.lang-b{background:transparent;border:1px solid var(--smoke);color:var(--cream-muted);padding:.3rem .65rem;border-radius:5px;font-size:.78rem;cursor:pointer;transition:all .2s;font-family:'Inter',sans-serif;display:flex;align-items:center;gap:.3rem;white-space:nowrap}
+.lang-b.on,.lang-b:hover{background:var(--gold);color:var(--dark);border-color:var(--gold)}
+.hero{min-height:80vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:8rem 2rem 4rem;background:linear-gradient(180deg,var(--dark) 0%,rgba(61,50,40,.55) 50%,var(--dark) 100%);position:relative}
 .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 40%,rgba(200,168,110,.08) 0%,transparent 70%)}
-.hero h1{font-family:'Playfair Display',serif;font-size:clamp(2.4rem,6vw,4.2rem);font-weight:700;color:var(--gold);position:relative;margin-bottom:.5rem;letter-spacing:1px}
-.hero .subtitle{font-size:clamp(1rem,2.5vw,1.3rem);color:var(--cream-muted);max-width:600px;position:relative;margin-bottom:2rem}
-.hero .cta{display:inline-block;padding:.85rem 2.4rem;background:var(--gold);color:var(--dark);font-weight:600;border-radius:6px;text-decoration:none;font-size:1rem;transition:all .25s;position:relative;letter-spacing:.5px;cursor:pointer;border:none;font-family:'Inter',sans-serif}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(2.4rem,6vw,4.2rem);font-weight:700;color:var(--gold);position:relative;margin-bottom:.5rem}
+.hero .sub{font-size:clamp(1rem,2.5vw,1.25rem);color:var(--cream-muted);max-width:600px;position:relative;margin-bottom:2rem}
+.hero .cta{display:inline-block;padding:.85rem 2.4rem;background:var(--gold);color:var(--dark);font-weight:600;border-radius:6px;font-size:1rem;transition:all .25s;position:relative;cursor:pointer;border:none;font-family:'Inter',sans-serif}
 .hero .cta:hover{background:var(--gold-light);transform:translateY(-2px)}
-/* PROGRESS BAR */
-.progress-bar{background:var(--dark-card);border-bottom:1px solid rgba(200,168,110,.1);padding:1rem 2rem;display:flex;align-items:center;justify-content:center;gap:1rem;flex-wrap:wrap;position:sticky;top:64px;z-index:90}
-.progress-label{font-size:.8rem;color:var(--smoke);font-weight:500}
-.progress-dots{display:flex;gap:.6rem}
+.pbar{background:var(--dark-card);border-bottom:1px solid rgba(200,168,110,.1);padding:1rem 2rem;display:flex;align-items:center;justify-content:center;gap:1rem;flex-wrap:wrap;position:sticky;top:64px;z-index:90}
+.plbl{font-size:.8rem;color:var(--smoke);font-weight:500}
+.pdots{display:flex;gap:.6rem}
 .pdot{width:36px;height:36px;border-radius:50%;border:2px solid var(--smoke);display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:600;color:var(--smoke);cursor:pointer;transition:all .3s;background:transparent}
-.pdot.completed{background:var(--gold);border-color:var(--gold);color:var(--dark)}
-.pdot.active{border-color:var(--gold);color:var(--gold)}
-.progress-text{font-size:.8rem;color:var(--cream-muted)}
-/* MODULE */
-.module-section{max-width:900px;margin:0 auto;padding:1rem 2rem}
-.module-accordion{border-top:1px solid rgba(200,168,110,.08);padding:1rem 0}
-.module-header{display:flex;align-items:center;gap:1rem;cursor:pointer;padding:1.2rem 0;user-select:none}
-.module-header:hover .module-title{color:var(--gold)}
-.module-number{font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:var(--gold);line-height:1;min-width:50px}
-.module-title{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:600;color:var(--cream);transition:color .2s;flex:1}
-.module-toggle{font-size:1.5rem;color:var(--gold);transition:transform .3s;min-width:30px;text-align:center}
-.module-toggle.open{transform:rotate(180deg)}
-.module-body{overflow:hidden;transition:max-height .4s ease,opacity .3s ease;max-height:0;opacity:0}
-.module-body.open{max-height:5000px;opacity:1}
-.module-content{padding:0 0 2rem}
-.module-img{width:100%;max-height:360px;object-fit:cover;border-radius:10px;margin:1.5rem 0;box-shadow:0 4px 20px rgba(0,0,0,.3);border:1px solid rgba(200,168,110,.08)}
-.module-content h3{font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--gold-light);margin:1.8rem 0 .6rem}
-.module-content p{color:var(--cream-muted);margin-bottom:1rem;font-size:.95rem}
-.module-content strong{color:var(--cream)}
-.takeaways{background:var(--dark-surface);border-left:3px solid var(--gold);padding:1rem 1.5rem;border-radius:0 8px 8px 0;margin-top:2rem}
-.takeaways-title{font-size:.75rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--gold);margin-bottom:.5rem;font-weight:600}
-.takeaways ul{list-style:none;padding:0}
-.takeaways li{padding:.25rem 0;color:var(--cream-muted);font-size:.95rem}
-.takeaways li::before{content:'◆ ';color:var(--gold);font-size:.6rem;vertical-align:middle;margin-right:.4rem}
-/* REFERENCES */
-.references{max-width:900px;margin:0 auto;padding:3rem 2rem 2rem;border-top:1px solid rgba(200,168,110,.08)}
-.references h2{font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--gold);margin-bottom:1rem}
-.references ol{padding-left:1.2rem}
-.references li{color:var(--cream-muted);font-size:.85rem;margin-bottom:.5rem}
-.references a{color:var(--gold);text-decoration:none}
-.references a:hover{text-decoration:underline}
-/* FOOTER */
+.pdot.done{background:var(--gold);border-color:var(--gold);color:var(--dark)}
+.pdot.cur{border-color:var(--gold);color:var(--gold)}
+.ptxt{font-size:.8rem;color:var(--cream-muted)}
+.mods{max-width:900px;margin:0 auto;padding:1rem 2rem}
+.macc{border-top:1px solid rgba(200,168,110,.08);padding:1rem 0}
+.mhdr{display:flex;align-items:center;gap:1rem;cursor:pointer;padding:1.2rem 0;user-select:none}
+.mhdr:hover .mtitle{color:var(--gold)}
+.mnum{font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:var(--gold);line-height:1;min-width:50px}
+.mtitle{font-family:'Playfair Display',serif;font-size:1.45rem;font-weight:600;color:var(--cream);transition:color .2s}
+.mdesc{color:var(--cream-muted);font-size:.9rem;margin-top:.2rem}
+.mtog{font-size:1.5rem;color:var(--gold);transition:transform .3s;min-width:30px;text-align:center}
+.mtog.open{transform:rotate(180deg)}
+.mbody{overflow:hidden;max-height:0;opacity:0;transition:max-height .5s ease,opacity .4s ease}
+.mbody.open{max-height:8000px;opacity:1}
+.mcont{padding:0 0 2rem}
+.mimg{width:100%;max-height:380px;object-fit:cover;border-radius:10px;margin:1.5rem 0;box-shadow:0 4px 24px rgba(0,0,0,.35);border:1px solid rgba(200,168,110,.08)}
+.mcont h3{font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--gold-light);margin:1.8rem 0 .6rem}
+.mcont p{color:var(--cream-muted);margin-bottom:1rem;font-size:.95rem}
+.mcont strong{color:var(--cream)}
+.tkwy{background:var(--dark-surface);border-left:3px solid var(--gold);padding:1rem 1.5rem;border-radius:0 8px 8px 0;margin-top:2rem}
+.tkwy-t{font-size:.75rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--gold);margin-bottom:.5rem;font-weight:600}
+.tkwy ul{list-style:none;padding:0}
+.tkwy li{padding:.25rem 0;color:var(--cream-muted);font-size:.95rem}
+.tkwy li::before{content:'\25C6 ';color:var(--gold);font-size:.6rem;vertical-align:middle;margin-right:.4rem}
+.refs{max-width:900px;margin:0 auto;padding:3rem 2rem 2rem;border-top:1px solid rgba(200,168,110,.08)}
+.refs h2{font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--gold);margin-bottom:1rem}
+.refs ol{padding-left:1.2rem}
+.refs li{color:var(--cream-muted);font-size:.85rem;margin-bottom:.5rem}
+.refs a{color:var(--gold);text-decoration:none}
+.refs a:hover{text-decoration:underline}
 footer{text-align:center;padding:3rem 2rem;border-top:1px solid rgba(200,168,110,.1);background:var(--dark-card)}
-.footer-brand img{height:36px;margin-bottom:.8rem}
+.fbrand img{height:36px;margin-bottom:.8rem}
 footer p{color:var(--smoke);font-size:.8rem}
 footer a{color:var(--gold);text-decoration:none}
-footer a:hover{text-decoration:underline}
-/* RESPONSIVE */
-@media(max-width:768px){
-  nav{padding:0 1rem;flex-wrap:wrap;height:auto;padding:.6rem 1rem}
-  .nav-links{display:none}
-  .module-section{padding:1rem 1.2rem}
-  .module-title{font-size:1.2rem}
-  .lang-switcher{gap:.25rem}
-  .lang-btn{font-size:.7rem;padding:.25rem .5rem}
-}
+@media(max-width:768px){nav{padding:0 .8rem;flex-wrap:wrap;height:auto;padding:.5rem .8rem;gap:.4rem}.nav-links{display:none}.mods{padding:1rem 1.2rem}.mtitle{font-size:1.15rem}.lang-sw{gap:.2rem}.lang-b{font-size:.68rem;padding:.2rem .4rem}}
 </style>
 </head>
 <body>
 <div id="root"></div>
-<script type="text/babel">
-// ═══════════════════════════════════════════
+<script>
+"use strict";
+var h = React.createElement;
+
+// ═══════════════════════════════════════
 // TRANSLATIONS
-// ═══════════════════════════════════════════
-const translations = {
+// ═══════════════════════════════════════
+var T = {
 en: {
-  lang_name: "English",
-  hero_title: "Mezcal Masterclass",
-  hero_sub: "Explore the world of mezcal — from origins to serving — in 4 immersive modules.",
-  hero_cta: "Start Learning",
-  progress: "Progress",
-  completed_of: "of 4 completed",
-  takeaways: "Key Takeaways",
-  ref_title: "References",
-  footer_text: "A premium mezcal experience. Sip it, don't shoot it.",
-  footer_copy: "© 2026 Bostom Bar. All rights reserved.",
-  // Module 1
-  m1_title: "What is Mezcal?",
-  m1_desc: "Origins, production, agave types, and what makes this spirit extraordinary.",
-  m1_h1: "The Spirit of Mexico",
-  m1_p1: 'The word mezcal comes from the Nahuatl <strong>mexcalli</strong>, meaning "cooked agave." Colloquially, mezcal means any spirit distilled from the agave plant. People have been making mezcal in Mexico since at least the Spanish conquest, potentially earlier. Like wine, mezcal is traditionally a broad term — but legally, it can only be labeled as mezcal in ten Mexican states under the Denominación de Origen.',
-  m1_h2: "Where is Mezcal Made?",
-  m1_p2: "While agave spirits are produced throughout Mexico, mezcal can only be legally certified in <strong>Oaxaca, Michoacán, Puebla, Guerrero, Zacatecas, Guanajuato, Tamaulipas, San Luis Potosí, Durango, and Sinaloa</strong>. Oaxaca produces around 80% of the mezcal available on the international market.",
-  m1_h3: "The Agave — A Singular Plant",
-  m1_p3: "No other spirit shares mezcal's base ingredient. Agave takes a <strong>minimum of 4 years to mature</strong>, usually 8–10 years. Once harvested, the plant dies — you must start over. This long life cycle makes mezcal production inherently artisanal and planning-intensive. Around 40 types of agave are used to make mezcal, with <strong>espadín</strong> being the most common.",
-  m1_t1: "Mezcal means 'cooked agave' in Nahuatl",
-  m1_t2: "Legally certified in 10 Mexican states, with Oaxaca producing ~80%",
-  m1_t3: "Agave takes 4–10 years to mature and dies after harvest",
-  m1_t4: "Around 40 agave species are used in mezcal production",
-  // Module 2
-  m2_title: "How Mezcal is Made",
-  m2_desc: "From harvest to distillation — the traditional craft behind every bottle.",
-  m2_h1: "Harvesting the Agave",
-  m2_p1: "After an agave reaches maturity, its <strong>pencas</strong> (leaves) are removed to expose the <strong>piña</strong> (heart). These trimmed agaves are left in the field for a few days before being transported to the distillery — called a <strong>palenque</strong> in Oaxaca, or <strong>vinata</strong> or <strong>taberna</strong> in other regions.",
-  m2_h2: "Roasting",
-  m2_p2: "The most traditional method uses an <strong>earthen pit oven</strong>, lined with rock, fired by wood, then sealed with leaves and dirt for a slow roast. Some producers use brick ovens heated by wood, gas, or steam. Industrial distilleries may use stainless steel autoclaves. The roasting method is a major contributor to mezcal's characteristic smoky flavor.",
-  m2_h3: "Crushing, Fermentation & Distillation",
-  m2_p3: "Roasted agave is crushed by hand with mallets, by a <strong>tahona</strong> (stone wheel), or by mechanical shredder. The fiber goes into open-air fermentation tanks (wood, stone, steel, or animal hide) where <strong>wild yeast</strong> kick-starts fermentation over 3–7 days. Finally, the mash is distilled in copper, clay, wood, or steel stills. Mezcal has a high level of congeners, which explains its elevated complexity of aromas and flavors.",
-  m2_t1: "Agave hearts (piñas) are roasted in earthen pit ovens for smoky flavor",
-  m2_t2: "Wild yeast from open-air fermentation creates complex flavors",
-  m2_t3: "Distillation in copper, clay, or wood stills preserves character",
-  m2_t4: "The entire process is deeply rooted in centuries-old tradition",
-  // Module 3
-  m3_title: "Mezcal vs. Tequila",
-  m3_desc: "Key differences in agave, process, regulation, and culture.",
-  m3_h1: "Tequila: A Type of Mezcal",
-  m3_p1: "Tequila is technically a type of mezcal — made specifically in the Tequila region of Jalisco since the 1600s. As demand grew, the process was industrialized. Today, tequila can only be made from <strong>blue agave (Agave tequilana weber)</strong>, in parts of five Mexican states, using specific regulated methods.",
-  m3_h2: "Production Differences",
-  m3_p2: 'While mezcal agave is typically cooked in pits or wood-fired ovens, tequila agave may be roasted in brick ovens, steamed in autoclaves, or processed through <strong>diffusors</strong> (machines that extract carbohydrates from raw agave). All certified mezcal is 100% agave, while tequila has a "mixto" category — only 51% agave sugar, supplemented by other sugars including corn syrup.',
-  m3_h3: "Aging & Categories",
-  m3_p3: "Barrel aging is common in tequila (blanco, gold, reposado, añejo, extra añejo) but rare in traditional mezcal. Mezcal categories focus on <strong>production method</strong> (mezcal, mezcal artesanal, mezcal ancestral) rather than aging. Related Mexican spirits with their own DOs include <strong>raicilla</strong> (Jalisco), <strong>bacanora</strong> (Sonora), and <strong>sotol</strong> (Chihuahua — technically not agave but Dasylirion).",
-  m3_t1: "Tequila is a type of mezcal, but not all mezcal is tequila",
-  m3_t2: "Tequila uses only blue agave; mezcal uses ~40 agave species",
-  m3_t3: 'All certified mezcal is 100% agave — tequila has a "mixto" category',
-  m3_t4: "Mezcal categorizes by production method, not barrel aging",
-  // Module 4
-  m4_title: "Tasting & Enjoying Mezcal",
-  m4_desc: "How to sip, what to look for, and why mezcal is worth savoring.",
-  m4_h1: "The Vessel & Pour",
-  m4_p1: 'Pour about 1 oz neat into a traditional <strong>veladora</strong> (wide-mouthed glass) or a Glencairn whiskey glass. Watch for <strong>perlas</strong> (bubbles) — mezcaleros use them to gauge ABV. Let it breathe for a few minutes before sipping, just like wine. The oxygen opens up flavors and aromatics.',
-  m4_h2: "The Besos Technique",
-  m4_p2: '<strong>Besos</strong> means "kisses." Sip the mezcal gently into the front of your mouth first, then "chew" it back over your tongue. This prevents the harsh throat hit. Pay attention to the <strong>front</strong> (first impression), <strong>middle</strong> (palate development), and <strong>finish</strong> (lingering flavors). Is it creamy, bright, smoky, floral, earthy?',
-  m4_h3: "Finding Good Mezcal",
-  m4_p3: "Find a local mezcal bar and order a flight — ask for quarter-ounce pours since mezcal runs 45–50% ABV. Drinking several different mezcals side by side gives you an instant comparative sense of your preferences. Look for 100% agave on the label, and remember: <strong>the best mezcal won't overpower you with smoke</strong>. An overly smoky expression is often a sign of a lesser product.",
-  m4_t1: "Use a veladora or Glencairn glass; watch for perlas",
-  m4_t2: 'Use "besos" — sip to the front of the mouth, then chew back',
-  m4_t3: "Order flights at mezcal bars for easy comparison",
-  m4_t4: "Great mezcal is complex and balanced, not just smoky",
+  ln:"English",hero_title:"Mezcal Masterclass",hero_sub:"Explore the world of mezcal \u2014 from origins to serving \u2014 in 4 immersive modules.",hero_cta:"Start Learning",progress:"Progress",cof:"of 4 completed",tkwy:"Key Takeaways",ref:"References",ftxt:"A premium mezcal experience. Sip it, don\u2019t shoot it.",fcopy:"\u00a9 2026 Bostom Bar. All rights reserved.",
+  m1t:"What is Mezcal?",m1d:"Origins, production, agave types, and what makes this spirit extraordinary.",
+  m1h1:"The Spirit of Mexico",m1p1:'The word mezcal comes from the Nahuatl <strong>mexcalli</strong>, meaning \u201ccooked agave.\u201d Colloquially, mezcal means any spirit distilled from the agave plant. People have been making mezcal in Mexico since at least the Spanish conquest, potentially earlier. Like wine, mezcal is traditionally a broad term \u2014 but legally, it can only be labeled as mezcal in ten Mexican states under the Denominaci\u00f3n de Origen.',
+  m1h2:"Where is Mezcal Made?",m1p2:"While agave spirits are produced throughout Mexico, mezcal can only be legally certified in <strong>Oaxaca, Michoac\u00e1n, Puebla, Guerrero, Zacatecas, Guanajuato, Tamaulipas, San Luis Potos\u00ed, Durango, and Sinaloa</strong>. Oaxaca produces around 80% of the mezcal available on the international market.",
+  m1h3:"The Agave \u2014 A Singular Plant",m1p3:"No other spirit shares mezcal\u2019s base ingredient. Agave takes a <strong>minimum of 4 years to mature</strong>, usually 8\u201310 years. Once harvested, the plant dies \u2014 you must start over. Around 40 types of agave are used to make mezcal, with <strong>espad\u00edn</strong> being the most common.",
+  m1k1:"Mezcal means \u2018cooked agave\u2019 in Nahuatl",m1k2:"Legally certified in 10 Mexican states; Oaxaca produces ~80%",m1k3:"Agave takes 4\u201310 years to mature and dies after harvest",m1k4:"Around 40 agave species are used in production",
+  m2t:"How Mezcal is Made",m2d:"From harvest to distillation \u2014 the traditional craft behind every bottle.",
+  m2h1:"Harvesting the Agave",m2p1:"After an agave reaches maturity, its <strong>pencas</strong> (leaves) are removed to expose the <strong>pi\u00f1a</strong> (heart). These trimmed agaves are transported to the distillery \u2014 called a <strong>palenque</strong> in Oaxaca, or <strong>vinata</strong> or <strong>taberna</strong> in other regions.",
+  m2h2:"Roasting",m2p2:"The most traditional method uses an <strong>earthen pit oven</strong>, lined with rock, fired by wood, then sealed with leaves and dirt for a slow roast. Some producers use brick ovens. Industrial distilleries may use stainless steel autoclaves. The roasting method is a major contributor to mezcal\u2019s characteristic smoky flavor.",
+  m2h3:"Crushing, Fermentation & Distillation",m2p3:"Roasted agave is crushed by hand with mallets, by a <strong>tahona</strong> (stone wheel), or by mechanical shredder. The fiber goes into open-air fermentation tanks where <strong>wild yeast</strong> kick-starts fermentation over 3\u20137 days. Finally, the mash is distilled in copper, clay, wood, or steel stills. Mezcal has a high level of congeners, which explains its elevated complexity of aromas and flavors.",
+  m2k1:"Agave hearts (pi\u00f1as) are roasted in earthen pit ovens for smoky flavor",m2k2:"Wild yeast from open-air fermentation creates complex flavors",m2k3:"Distillation in copper, clay, or wood stills preserves character",m2k4:"The entire process is deeply rooted in centuries-old tradition",
+  m3t:"Mezcal vs. Tequila",m3d:"Key differences in agave, process, regulation, and culture.",
+  m3h1:"Tequila: A Type of Mezcal",m3p1:"Tequila is technically a type of mezcal \u2014 made specifically in the Tequila region of Jalisco since the 1600s. Today, tequila can only be made from <strong>blue agave (Agave tequilana weber)</strong>, in parts of five Mexican states, using specific regulated methods.",
+  m3h2:"Production Differences",m3p2:'While mezcal agave is typically cooked in pits or wood-fired ovens, tequila agave may be roasted in brick ovens, steamed in autoclaves, or processed through <strong>diffusors</strong>. All certified mezcal is 100% agave, while tequila has a \u201cmixto\u201d category \u2014 only 51% agave sugar, supplemented by other sugars including corn syrup.',
+  m3h3:"Aging & Categories",m3p3:"Barrel aging is common in tequila (blanco, gold, reposado, a\u00f1ejo, extra a\u00f1ejo) but rare in traditional mezcal. Mezcal categories focus on <strong>production method</strong> (mezcal, mezcal artesanal, mezcal ancestral). Related spirits with their own DOs include <strong>raicilla</strong>, <strong>bacanora</strong>, and <strong>sotol</strong>.",
+  m3k1:"Tequila is a type of mezcal, but not all mezcal is tequila",m3k2:"Tequila uses only blue agave; mezcal uses ~40 species",m3k3:'All certified mezcal is 100% agave \u2014 tequila has a \u201cmixto\u201d category',m3k4:"Mezcal categorizes by production method, not barrel aging",
+  m4t:"Tasting & Enjoying Mezcal",m4d:"How to sip, what to look for, and why mezcal is worth savoring.",
+  m4h1:"The Vessel & Pour",m4p1:'Pour about 1 oz neat into a traditional <strong>veladora</strong> (wide-mouthed glass) or a Glencairn whiskey glass. Watch for <strong>perlas</strong> (bubbles) \u2014 mezcaleros use them to gauge ABV. Let it breathe for a few minutes before sipping.',
+  m4h2:"The Besos Technique",m4p2:'<strong>Besos</strong> means \u201ckisses.\u201d Sip the mezcal gently into the front of your mouth first, then \u201cchew\u201d it back over your tongue. Pay attention to the <strong>front</strong> (first impression), <strong>middle</strong> (palate development), and <strong>finish</strong> (lingering flavors). Is it creamy, bright, smoky, floral, earthy?',
+  m4h3:"Finding Good Mezcal",m4p3:"Find a local mezcal bar and order a flight \u2014 ask for quarter-ounce pours since mezcal runs 45\u201350% ABV. Look for 100% agave on the label, and remember: <strong>the best mezcal won\u2019t overpower you with smoke</strong>.",
+  m4k1:"Use a veladora or Glencairn glass; watch for perlas",m4k2:'Use \u201cbesos\u201d \u2014 sip to the front of the mouth, then chew back',m4k3:"Order flights at mezcal bars for easy comparison",m4k4:"Great mezcal is complex and balanced, not just smoky"
 },
 es: {
-  lang_name: "Español",
-  hero_title: "Masterclass de Mezcal",
-  hero_sub: "Explora el mundo del mezcal — desde sus orígenes hasta cómo servirlo — en 4 módulos inmersivos.",
-  hero_cta: "Empezar a Aprender",
-  progress: "Progreso",
-  completed_of: "de 4 completados",
-  takeaways: "Puntos Clave",
-  ref_title: "Referencias",
-  footer_text: "Una experiencia premium de mezcal. Sorbéalo, no lo dispare.",
-  footer_copy: "© 2026 Bostom Bar. Todos los derechos reservados.",
-  m1_title: "¿Qué es el Mezcal?",
-  m1_desc: "Orígenes, producción, tipos de agave y qué hace especial a este destilado.",
-  m1_h1: "El Espíritu de México",
-  m1_p1: 'La palabra mezcal viene del náhuatl <strong>mexcalli</strong>, que significa "agave cocido". Coloquialmente, mezcal significa cualquier destilado de la planta de agave. Se ha producido mezcal en México desde al menos la conquista española. Legalmente, solo puede etiquetarse como mezcal en diez estados mexicanos bajo la Denominación de Origen.',
-  m1_h2: "¿Dónde se Produce el Mezcal?",
-  m1_p2: "El mezcal solo puede ser certificado legalmente en <strong>Oaxaca, Michoacán, Puebla, Guerrero, Zacatecas, Guanajuato, Tamaulipas, San Luis Potosí, Durango y Sinaloa</strong>. Oaxaca produce alrededor del 80% del mezcal disponible en el mercado internacional.",
-  m1_h3: "El Agave — Una Planta Singular",
-  m1_p3: "Ningún otro destilado comparte la base del mezcal. El agave necesita un <strong>mínimo de 4 años para madurar</strong>, normalmente 8–10 años. Al cosecharlo, la planta muere. Alrededor de 40 tipos de agave se usan para hacer mezcal, siendo el <strong>espadín</strong> el más común.",
-  m1_t1: "Mezcal significa 'agave cocido' en náhuatl",
-  m1_t2: "Certificado legalmente en 10 estados mexicanos, Oaxaca produce ~80%",
-  m1_t3: "El agave tarda 4–10 años en madurar y muere al cosecharse",
-  m1_t4: "Se utilizan alrededor de 40 especies de agave",
-  m2_title: "Cómo se Hace el Mezcal",
-  m2_desc: "De la cosecha a la destilación — el arte tradicional detrás de cada botella.",
-  m2_h1: "Cosecha del Agave",
-  m2_p1: "Cuando el agave madura, se retiran las <strong>pencas</strong> (hojas) para exponer la <strong>piña</strong> (corazón). Los agaves se transportan a la destilería — llamada <strong>palenque</strong> en Oaxaca, o <strong>vinata</strong> o <strong>taberna</strong> en otras regiones.",
-  m2_h2: "El Horneado",
-  m2_p2: "El método más tradicional usa un <strong>horno de tierra</strong>, revestido de piedra y sellado con hojas y tierra para una cocción lenta. El método de cocción es un factor principal del sabor ahumado característico del mezcal.",
-  m2_h3: "Molienda, Fermentación y Destilación",
-  m2_p3: "El agave asado se muele a mano, con <strong>tahona</strong> (rueda de piedra) o trituradora mecánica. La fibra fermenta en tanques abiertos donde las <strong>levaduras silvestres</strong> inician la fermentación durante 3–7 días. Finalmente, se destila en alambiques de cobre, barro, madera o acero.",
-  m2_t1: "Las piñas se asan en hornos de tierra para lograr el sabor ahumado",
-  m2_t2: "Las levaduras silvestres crean sabores complejos",
-  m2_t3: "La destilación en cobre, barro o madera preserva el carácter",
-  m2_t4: "Todo el proceso tiene siglos de tradición",
-  m3_title: "Mezcal vs. Tequila",
-  m3_desc: "Diferencias clave en agave, proceso, regulación y cultura.",
-  m3_h1: "Tequila: Un Tipo de Mezcal",
-  m3_p1: "El tequila es técnicamente un tipo de mezcal, hecho específicamente en la región de Tequila, Jalisco. Hoy solo puede hacerse con <strong>agave azul (Agave tequilana weber)</strong>, en partes de cinco estados.",
-  m3_h2: "Diferencias en la Producción",
-  m3_p2: 'El agave para mezcal se cuece en fosas o hornos de leña; el tequila puede usar autoclaves o <strong>difusores</strong>. Todo mezcal certificado es 100% agave, mientras que el tequila tiene categoría "mixto" — solo 51% azúcar de agave.',
-  m3_h3: "Envejecimiento y Categorías",
-  m3_p3: "El envejecimiento en barrica es común en tequila pero raro en mezcal tradicional. Las categorías del mezcal se basan en el <strong>método de producción</strong>: mezcal, mezcal artesanal y mezcal ancestral. Destilados relacionados incluyen <strong>raicilla</strong>, <strong>bacanora</strong> y <strong>sotol</strong>.",
-  m3_t1: "El tequila es un tipo de mezcal, pero no todo mezcal es tequila",
-  m3_t2: "El tequila usa solo agave azul; el mezcal usa ~40 especies",
-  m3_t3: 'Todo mezcal certificado es 100% agave — el tequila tiene categoría "mixto"',
-  m3_t4: "El mezcal se categoriza por método de producción, no por envejecimiento",
-  m4_title: "Catar y Disfrutar el Mezcal",
-  m4_desc: "Cómo sorber, qué buscar y por qué vale la pena saborear el mezcal.",
-  m4_h1: "El Vaso y el Servicio",
-  m4_p1: 'Sirve 30 ml en una <strong>veladora</strong> o vaso Glencairn. Observa las <strong>perlas</strong> (burbujas) para estimar el ABV. Déjalo reposar unos minutos antes de beber.',
-  m4_h2: "La Técnica de Besos",
-  m4_p2: '<strong>Besos</strong> significa "besos." Sorbe suavemente hacia la parte frontal de la boca, luego "mastica" sobre la lengua. Presta atención a la <strong>entrada</strong>, el <strong>medio</strong> y el <strong>final</strong>.',
-  m4_h3: "Encontrar Buen Mezcal",
-  m4_p3: "Busca un bar de mezcal y pide una degustación. Pide porciones pequeñas ya que el mezcal tiene 45–50% ABV. Busca 100% agave en la etiqueta. <strong>El mejor mezcal no te abruma con humo</strong>.",
-  m4_t1: "Usa veladora o Glencairn; observa las perlas",
-  m4_t2: 'Usa "besos" — sorbe al frente de la boca',
-  m4_t3: "Pide degustaciones para comparar fácilmente",
-  m4_t4: "El gran mezcal es complejo y equilibrado, no solo ahumado",
+  ln:"Espa\u00f1ol",hero_title:"Masterclass de Mezcal",hero_sub:"Explora el mundo del mezcal \u2014 desde sus or\u00edgenes hasta c\u00f3mo servirlo \u2014 en 4 m\u00f3dulos.",hero_cta:"Empezar a Aprender",progress:"Progreso",cof:"de 4 completados",tkwy:"Puntos Clave",ref:"Referencias",ftxt:"Una experiencia premium de mezcal. Sorb\u00e9alo, no lo dispare.",fcopy:"\u00a9 2026 Bostom Bar. Todos los derechos reservados.",
+  m1t:"\u00bfQu\u00e9 es el Mezcal?",m1d:"Or\u00edgenes, producci\u00f3n, tipos de agave y qu\u00e9 hace especial a este destilado.",
+  m1h1:"El Esp\u00edritu de M\u00e9xico",m1p1:'La palabra mezcal viene del n\u00e1huatl <strong>mexcalli</strong>, que significa \u201cagave cocido.\u201d Se ha producido mezcal en M\u00e9xico desde al menos la conquista espa\u00f1ola. Legalmente, solo puede etiquetarse como mezcal en diez estados mexicanos bajo la Denominaci\u00f3n de Origen.',
+  m1h2:"\u00bfD\u00f3nde se Produce?",m1p2:"El mezcal solo puede ser certificado en <strong>Oaxaca, Michoac\u00e1n, Puebla, Guerrero, Zacatecas, Guanajuato, Tamaulipas, San Luis Potos\u00ed, Durango y Sinaloa</strong>. Oaxaca produce alrededor del 80% del mezcal internacional.",
+  m1h3:"El Agave \u2014 Una Planta Singular",m1p3:"El agave necesita un <strong>m\u00ednimo de 4 a\u00f1os para madurar</strong>, normalmente 8\u201310. Al cosecharlo, la planta muere. Alrededor de 40 tipos de agave se usan, siendo el <strong>espad\u00edn</strong> el m\u00e1s com\u00fan.",
+  m1k1:"Mezcal significa \u2018agave cocido\u2019 en n\u00e1huatl",m1k2:"Certificado en 10 estados mexicanos; Oaxaca produce ~80%",m1k3:"El agave tarda 4\u201310 a\u00f1os en madurar y muere al cosecharse",m1k4:"Se utilizan alrededor de 40 especies de agave",
+  m2t:"C\u00f3mo se Hace el Mezcal",m2d:"De la cosecha a la destilaci\u00f3n \u2014 el arte detr\u00e1s de cada botella.",
+  m2h1:"Cosecha del Agave",m2p1:"Se retiran las <strong>pencas</strong> para exponer la <strong>pi\u00f1a</strong>. La destiler\u00eda se llama <strong>palenque</strong> en Oaxaca, <strong>vinata</strong> o <strong>taberna</strong> en otras regiones.",
+  m2h2:"Horneado",m2p2:"El m\u00e9todo m\u00e1s tradicional usa un <strong>horno de tierra</strong>, revestido de piedra y sellado para cocci\u00f3n lenta. El m\u00e9todo de cocci\u00f3n es un factor principal del sabor ahumado caracter\u00edstico.",
+  m2h3:"Molienda, Fermentaci\u00f3n y Destilaci\u00f3n",m2p3:"El agave asado se muele con <strong>tahona</strong> o trituradora. La fibra fermenta en tanques abiertos donde las <strong>levaduras silvestres</strong> inician la fermentaci\u00f3n durante 3\u20137 d\u00edas. Se destila en alambiques de cobre, barro, madera o acero.",
+  m2k1:"Las pi\u00f1as se asan en hornos de tierra para el sabor ahumado",m2k2:"Las levaduras silvestres crean sabores complejos",m2k3:"Destilaci\u00f3n en cobre, barro o madera preserva el car\u00e1cter",m2k4:"Proceso con siglos de tradici\u00f3n",
+  m3t:"Mezcal vs. Tequila",m3d:"Diferencias clave en agave, proceso, regulaci\u00f3n y cultura.",
+  m3h1:"Tequila: Un Tipo de Mezcal",m3p1:"El tequila es un tipo de mezcal, hecho en la regi\u00f3n de Tequila, Jalisco. Solo puede hacerse con <strong>agave azul</strong> en partes de cinco estados.",
+  m3h2:"Diferencias de Producci\u00f3n",m3p2:'El mezcal se cuece en fosas o hornos de le\u00f1a; el tequila puede usar autoclaves o <strong>difusores</strong>. Todo mezcal certificado es 100% agave; el tequila tiene categor\u00eda \u201cmixto\u201d (51% agave).',
+  m3h3:"Envejecimiento y Categor\u00edas",m3p3:"El envejecimiento en barrica es com\u00fan en tequila pero raro en mezcal. Las categor\u00edas del mezcal se basan en el <strong>m\u00e9todo de producci\u00f3n</strong>: mezcal, artesanal, ancestral.",
+  m3k1:"El tequila es un tipo de mezcal, no todo mezcal es tequila",m3k2:"El tequila usa solo agave azul; el mezcal usa ~40 especies",m3k3:'Mezcal certificado es 100% agave; tequila tiene \u201cmixto\u201d',m3k4:"El mezcal se categoriza por m\u00e9todo de producci\u00f3n",
+  m4t:"Catar y Disfrutar el Mezcal",m4d:"C\u00f3mo sorber, qu\u00e9 buscar y por qu\u00e9 vale la pena saborearlo.",
+  m4h1:"El Vaso y el Servicio",m4p1:'Sirve 30 ml en una <strong>veladora</strong> o vaso Glencairn. Observa las <strong>perlas</strong> para estimar el ABV. D\u00e9jalo reposar unos minutos.',
+  m4h2:"La T\u00e9cnica de Besos",m4p2:'<strong>Besos</strong>: sorbe hacia la parte frontal de la boca, luego \u201cmastica\u201d sobre la lengua. Atiende a la <strong>entrada</strong>, <strong>medio</strong> y <strong>final</strong>.',
+  m4h3:"Encontrar Buen Mezcal",m4p3:"Busca un bar de mezcal y pide degustaci\u00f3n. 45\u201350% ABV. Busca 100% agave. <strong>El mejor mezcal no te abruma con humo</strong>.",
+  m4k1:"Usa veladora o Glencairn; observa las perlas",m4k2:'Usa \u201cbesos\u201d \u2014 sorbe al frente de la boca',m4k3:"Pide degustaciones para comparar",m4k4:"El gran mezcal es complejo y equilibrado"
 },
 ja: {
-  lang_name: "日本語",
-  hero_title: "メスカル マスタークラス",
-  hero_sub: "起源から楽しみ方まで、4つのモジュールでメスカルの世界を探求しましょう。",
-  hero_cta: "学習を始める",
-  progress: "進捗",
-  completed_of: "/ 4 完了",
-  takeaways: "キーポイント",
-  ref_title: "参考文献",
-  footer_text: "プレミアムなメスカル体験。ショットではなく、ゆっくり味わって。",
-  footer_copy: "© 2026 Bostom Bar. All rights reserved.",
-  m1_title: "メスカルとは？",
-  m1_desc: "起源、製造、アガベの種類、この蒸留酒を特別にするもの。",
-  m1_h1: "メキシコのスピリッツ",
-  m1_p1: 'メスカルという言葉はナワトル語の<strong>mexcalli</strong>（「調理されたアガベ」）に由来します。メスカルは少なくともスペイン征服時代からメキシコで作られてきました。法的には、原産地呼称の下で10のメキシコ州でのみメスカルとして認証されます。',
-  m1_h2: "メスカルの産地",
-  m1_p2: "<strong>オアハカ、ミチョアカン、プエブラ、ゲレロ、サカテカス、グアナフアト、タマウリパス、サン・ルイス・ポトシ、ドゥランゴ、シナロア</strong>で認証可能。オアハカは国際市場のメスカルの約80%を生産しています。",
-  m1_h3: "アガベ — 唯一無二の植物",
-  m1_p3: "アガベは成熟に<strong>最低4年</strong>、通常8〜10年かかります。収穫すると植物は死にます。約40種のアガベがメスカル製造に使われ、<strong>エスパディン</strong>が最も一般的です。",
-  m1_t1: "メスカルはナワトル語で「調理されたアガベ」", m1_t2: "10州で認証、オアハカが約80%を生産", m1_t3: "アガベは成熟に4〜10年、収穫で死滅", m1_t4: "約40種のアガベが使用される",
-  m2_title: "メスカルの作り方",
-  m2_desc: "収穫から蒸留まで — 伝統的な製法。",
-  m2_h1: "アガベの収穫",
-  m2_p1: "成熟したアガベの<strong>ペンカス</strong>（葉）を除去し、<strong>ピニャ</strong>（心臓部）を露出させます。蒸留所はオアハカでは<strong>パレンケ</strong>と呼ばれます。",
-  m2_h2: "焙煎",
-  m2_p2: "最も伝統的な方法は<strong>土窯</strong>を使用。石で裏打ちし、薪で加熱し、葉と土で密封してゆっくり焼きます。これがメスカルのスモーキーな風味の主な要因です。",
-  m2_h3: "粉砕、発酵、蒸留",
-  m2_p3: "焼いたアガベを手作業、<strong>タオナ</strong>（石臼）、または機械で粉砕。野外の発酵槽で<strong>野生酵母</strong>が3〜7日間発酵を開始。銅、粘土、木、鋼の蒸留器で蒸留されます。",
-  m2_t1: "土窯でピニャを焼いてスモーキーな風味を生む", m2_t2: "野生酵母が複雑な風味を創出", m2_t3: "銅・粘土・木の蒸留器で個性を保持", m2_t4: "数百年の伝統に根ざした製法",
-  m3_title: "メスカル vs. テキーラ",
-  m3_desc: "アガベ、製法、規制、文化の主要な違い。",
-  m3_h1: "テキーラ：メスカルの一種",
-  m3_p1: "テキーラは技術的にはメスカルの一種で、ハリスコ州のテキーラ地域で1600年代から作られています。現在は<strong>ブルーアガベ（Agave tequilana weber）</strong>のみ使用可能。",
-  m3_h2: "製造の違い",
-  m3_p2: 'メスカルのアガベは土窯や薪オーブンで調理。テキーラはオートクレーブや<strong>ディフューザー</strong>を使用可能。認証メスカルは100%アガベ。テキーラには「ミクスト」カテゴリーあり。',
-  m3_h3: "熟成とカテゴリー",
-  m3_p3: "樽熟成はテキーラでは一般的だがメスカルでは稀。メスカルのカテゴリーは<strong>製造方法</strong>（メスカル、アルテサナル、アンセストラル）に基づきます。",
-  m3_t1: "テキーラはメスカルの一種だが、逆は成り立たない", m3_t2: "テキーラはブルーアガベのみ、メスカルは約40種", m3_t3: "認証メスカルは100%アガベ", m3_t4: "メスカルは製造方法で分類",
-  m4_title: "テイスティングと楽しみ方",
-  m4_desc: "飲み方、注目ポイント、メスカルを味わう価値。",
-  m4_h1: "グラスと注ぎ方",
-  m4_p1: '<strong>ベラドーラ</strong>またはグレンケアンに約30mlをストレートで。<strong>ペルラス</strong>（泡）でABVを推定。数分間呼吸させてから味わいます。',
-  m4_h2: "ベソスの技法",
-  m4_p2: '<strong>ベソス</strong>は「キス」。口の前部に含み、舌の上で「噛む」ように。<strong>フロント</strong>、<strong>ミドル</strong>、<strong>フィニッシュ</strong>に注目。',
-  m4_h3: "良いメスカルの見つけ方",
-  m4_p3: "メスカルバーでフライトを注文。45–50% ABVなので少量で。100%アガベを確認。<strong>最高のメスカルはスモークで圧倒しません</strong>。",
-  m4_t1: "ベラドーラまたはグレンケアンを使用", m4_t2: "ベソスで口の前部に含む", m4_t3: "フライトで比較テイスティング", m4_t4: "優れたメスカルは複雑でバランスが良い",
+  ln:"\u65e5\u672c\u8a9e",hero_title:"\u30e1\u30b9\u30ab\u30eb \u30de\u30b9\u30bf\u30fc\u30af\u30e9\u30b9",hero_sub:"\u8d77\u6e90\u304b\u3089\u697d\u3057\u307f\u65b9\u307e\u3067\u30014\u3064\u306e\u30e2\u30b8\u30e5\u30fc\u30eb\u3067\u30e1\u30b9\u30ab\u30eb\u306e\u4e16\u754c\u3092\u63a2\u6c42\u3002",hero_cta:"\u5b66\u7fd2\u3092\u59cb\u3081\u308b",progress:"\u9032\u6357",cof:"/ 4 \u5b8c\u4e86",tkwy:"\u30ad\u30fc\u30dd\u30a4\u30f3\u30c8",ref:"\u53c2\u8003\u6587\u732e",ftxt:"\u30d7\u30ec\u30df\u30a2\u30e0\u306a\u30e1\u30b9\u30ab\u30eb\u4f53\u9a13\u3002\u30b7\u30e7\u30c3\u30c8\u3067\u306f\u306a\u304f\u3001\u3086\u3063\u304f\u308a\u5473\u308f\u3063\u3066\u3002",fcopy:"\u00a9 2026 Bostom Bar.",
+  m1t:"\u30e1\u30b9\u30ab\u30eb\u3068\u306f\uff1f",m1d:"\u8d77\u6e90\u3001\u88fd\u9020\u3001\u30a2\u30ac\u30d9\u306e\u7a2e\u985e\u3002",
+  m1h1:"\u30e1\u30ad\u30b7\u30b3\u306e\u30b9\u30d4\u30ea\u30c3\u30c4",m1p1:'\u30e1\u30b9\u30ab\u30eb\u306f\u30ca\u30ef\u30c8\u30eb\u8a9e\u306e<strong>mexcalli</strong>\uff08\u300c\u8abf\u7406\u3055\u308c\u305f\u30a2\u30ac\u30d9\u300d\uff09\u306b\u7531\u6765\u3002\u30b9\u30da\u30a4\u30f3\u5f81\u670d\u6642\u4ee3\u304b\u3089\u30e1\u30ad\u30b7\u30b3\u3067\u4f5c\u3089\u308c\u3066\u304d\u307e\u3057\u305f\u300210\u306e\u30e1\u30ad\u30b7\u30b3\u5dde\u3067\u306e\u307f\u8a8d\u8a3c\u3055\u308c\u307e\u3059\u3002',
+  m1h2:"\u30e1\u30b9\u30ab\u30eb\u306e\u7523\u5730",m1p2:"<strong>\u30aa\u30a2\u30cf\u30ab\u3001\u30df\u30c1\u30e7\u30a2\u30ab\u30f3\u3001\u30d7\u30a8\u30d6\u30e9\u3001\u30b2\u30ec\u30ed\u3001\u30b5\u30ab\u30c6\u30ab\u30b9\u3001\u30b0\u30a2\u30ca\u30d5\u30a2\u30c8\u3001\u30bf\u30de\u30a6\u30ea\u30d1\u30b9\u3001\u30b5\u30f3\u30fb\u30eb\u30a4\u30b9\u30fb\u30dd\u30c8\u30b7\u3001\u30c9\u30a5\u30e9\u30f3\u30b4\u3001\u30b7\u30ca\u30ed\u30a2</strong>\u3002\u30aa\u30a2\u30cf\u30ab\u304c\u56fd\u969b\u5e02\u5834\u306e\u7d0480%\u3092\u751f\u7523\u3002",
+  m1h3:"\u30a2\u30ac\u30d9 \u2014 \u552f\u4e00\u7121\u4e8c\u306e\u690d\u7269",m1p3:"\u30a2\u30ac\u30d9\u306f\u6210\u719f\u306b<strong>\u6700\u4f4e4\u5e74</strong>\u3001\u901a\u5e388\u301c10\u5e74\u3002\u53ce\u7a6b\u3067\u690d\u7269\u306f\u6b7b\u6ec5\u3002\u7d0440\u7a2e\u304c\u4f7f\u7528\u3055\u308c\u3001<strong>\u30a8\u30b9\u30d1\u30c7\u30a3\u30f3</strong>\u304c\u6700\u3082\u4e00\u822c\u7684\u3002",
+  m1k1:"\u30ca\u30ef\u30c8\u30eb\u8a9e\u3067\u300c\u8abf\u7406\u3055\u308c\u305f\u30a2\u30ac\u30d9\u300d",m1k2:"10\u5dde\u3067\u8a8d\u8a3c\u3001\u30aa\u30a2\u30cf\u30ab\u304c\u7d0480%",m1k3:"\u6210\u719f\u306b4\u301c10\u5e74\u3001\u53ce\u7a6b\u3067\u6b7b\u6ec5",m1k4:"\u7d0440\u7a2e\u306e\u30a2\u30ac\u30d9\u304c\u4f7f\u7528",
+  m2t:"\u30e1\u30b9\u30ab\u30eb\u306e\u4f5c\u308a\u65b9",m2d:"\u53ce\u7a6b\u304b\u3089\u84b8\u7559\u307e\u3067\u3002",
+  m2h1:"\u30a2\u30ac\u30d9\u306e\u53ce\u7a6b",m2p1:"\u6210\u719f\u3057\u305f\u30a2\u30ac\u30d9\u306e<strong>\u30da\u30f3\u30ab\u30b9</strong>\u3092\u9664\u53bb\u3057<strong>\u30d4\u30cb\u30e3</strong>\u3092\u9732\u51fa\u3002\u84b8\u7559\u6240\u306f\u30aa\u30a2\u30cf\u30ab\u3067\u306f<strong>\u30d1\u30ec\u30f3\u30b1</strong>\u3002",
+  m2h2:"\u7119\u714e",m2p2:"\u6700\u3082\u4f1d\u7d71\u7684\u306a\u65b9\u6cd5\u306f<strong>\u571f\u7aaf</strong>\u3002\u77f3\u3067\u88cf\u6253\u3061\u3057\u3001\u8449\u3068\u571f\u3067\u5bc6\u5c01\u3002\u30b9\u30e2\u30fc\u30ad\u30fc\u306a\u98a8\u5473\u306e\u4e3b\u306a\u8981\u56e0\u3002",
+  m2h3:"\u7c89\u7815\u3001\u767a\u9175\u3001\u84b8\u7559",m2p3:"\u7119\u714e\u3057\u305f\u30a2\u30ac\u30d9\u3092<strong>\u30bf\u30aa\u30ca</strong>\u3067\u7c89\u7815\u3002\u91ce\u5916\u306e\u767a\u9175\u69fd\u3067<strong>\u91ce\u751f\u9175\u6bcd</strong>\u304c3\u301c7\u65e5\u9593\u767a\u9175\u3002\u9285\u3001\u7c98\u571f\u3001\u6728\u306e\u84b8\u7559\u5668\u3067\u84b8\u7559\u3002",
+  m2k1:"\u571f\u7aaf\u3067\u30d4\u30cb\u30e3\u3092\u7119\u714e",m2k2:"\u91ce\u751f\u9175\u6bcd\u304c\u8907\u96d1\u306a\u98a8\u5473\u3092\u5275\u51fa",m2k3:"\u9285\u30fb\u7c98\u571f\u30fb\u6728\u306e\u84b8\u7559\u5668\u3067\u500b\u6027\u3092\u4fdd\u6301",m2k4:"\u6570\u767e\u5e74\u306e\u4f1d\u7d71",
+  m3t:"\u30e1\u30b9\u30ab\u30eb vs. \u30c6\u30ad\u30fc\u30e9",m3d:"\u4e3b\u8981\u306a\u9055\u3044\u3002",
+  m3h1:"\u30c6\u30ad\u30fc\u30e9\uff1a\u30e1\u30b9\u30ab\u30eb\u306e\u4e00\u7a2e",m3p1:"\u30c6\u30ad\u30fc\u30e9\u306f\u30cf\u30ea\u30b9\u30b3\u5dde\u30671600\u5e74\u4ee3\u304b\u3089\u4f5c\u3089\u308c\u3066\u3044\u308b\u30e1\u30b9\u30ab\u30eb\u306e\u4e00\u7a2e\u3002<strong>\u30d6\u30eb\u30fc\u30a2\u30ac\u30d9</strong>\u306e\u307f\u4f7f\u7528\u53ef\u80fd\u3002",
+  m3h2:"\u88fd\u9020\u306e\u9055\u3044",m3p2:"\u30e1\u30b9\u30ab\u30eb\u306f\u571f\u7aaf\u3084\u85aa\u30aa\u30fc\u30d6\u30f3\u3002\u30c6\u30ad\u30fc\u30e9\u306f\u30aa\u30fc\u30c8\u30af\u30ec\u30fc\u30d6\u3084<strong>\u30c7\u30a3\u30d5\u30e5\u30fc\u30b6\u30fc</strong>\u3082\u4f7f\u7528\u3002\u8a8d\u8a3c\u30e1\u30b9\u30ab\u30eb\u306f100%\u30a2\u30ac\u30d9\u3002\u30c6\u30ad\u30fc\u30e9\u306b\u306f\u300c\u30df\u30af\u30b9\u30c8\u300d\u30ab\u30c6\u30b4\u30ea\u30fc\u3042\u308a\u3002",
+  m3h3:"\u719f\u6210\u3068\u30ab\u30c6\u30b4\u30ea\u30fc",m3p3:"\u6a3d\u719f\u6210\u306f\u30c6\u30ad\u30fc\u30e9\u3067\u306f\u4e00\u822c\u7684\u3060\u304c\u30e1\u30b9\u30ab\u30eb\u3067\u306f\u7a00\u3002\u30e1\u30b9\u30ab\u30eb\u306f<strong>\u88fd\u9020\u65b9\u6cd5</strong>\u3067\u5206\u985e\u3002",
+  m3k1:"\u30c6\u30ad\u30fc\u30e9\u306f\u30e1\u30b9\u30ab\u30eb\u306e\u4e00\u7a2e",m3k2:"\u30c6\u30ad\u30fc\u30e9\u306f\u30d6\u30eb\u30fc\u30a2\u30ac\u30d9\u306e\u307f",m3k3:"\u8a8d\u8a3c\u30e1\u30b9\u30ab\u30eb\u306f100%\u30a2\u30ac\u30d9",m3k4:"\u30e1\u30b9\u30ab\u30eb\u306f\u88fd\u9020\u65b9\u6cd5\u3067\u5206\u985e",
+  m4t:"\u30c6\u30a4\u30b9\u30c6\u30a3\u30f3\u30b0\u3068\u697d\u3057\u307f\u65b9",m4d:"\u98f2\u307f\u65b9\u3001\u6ce8\u76ee\u30dd\u30a4\u30f3\u30c8\u3002",
+  m4h1:"\u30b0\u30e9\u30b9\u3068\u6ce8\u304e\u65b9",m4p1:'<strong>\u30d9\u30e9\u30c9\u30fc\u30e9</strong>\u307e\u305f\u306fGlencairn\u306b\u7d0430ml\u3002<strong>\u30da\u30eb\u30e9\u30b9</strong>\u3067ABV\u3092\u63a8\u5b9a\u3002\u6570\u5206\u9593\u547c\u5438\u3055\u305b\u307e\u3059\u3002',
+  m4h2:"\u30d9\u30bd\u30b9\u306e\u6280\u6cd5",m4p2:'<strong>\u30d9\u30bd\u30b9</strong>\u306f\u300c\u30ad\u30b9\u300d\u3002\u53e3\u306e\u524d\u90e8\u306b\u542b\u307f\u3001\u820c\u306e\u4e0a\u3067\u300c\u564c\u3080\u300d\u3088\u3046\u306b\u3002<strong>\u30d5\u30ed\u30f3\u30c8</strong>\u3001<strong>\u30df\u30c9\u30eb</strong>\u3001<strong>\u30d5\u30a3\u30cb\u30c3\u30b7\u30e5</strong>\u306b\u6ce8\u76ee\u3002',
+  m4h3:"\u826f\u3044\u30e1\u30b9\u30ab\u30eb\u306e\u898b\u3064\u3051\u65b9",m4p3:"\u30e1\u30b9\u30ab\u30eb\u30d0\u30fc\u3067\u30d5\u30e9\u30a4\u30c8\u3092\u6ce8\u6587\u300245\u301350% ABV\u3002100%\u30a2\u30ac\u30d9\u3092\u78ba\u8a8d\u3002<strong>\u6700\u9ad8\u306e\u30e1\u30b9\u30ab\u30eb\u306f\u30b9\u30e2\u30fc\u30af\u3067\u5727\u5012\u3057\u307e\u305b\u3093</strong>\u3002",
+  m4k1:"\u30d9\u30e9\u30c9\u30fc\u30e9\u307e\u305f\u306fGlencairn\u3092\u4f7f\u7528",m4k2:"\u30d9\u30bd\u30b9\u3067\u53e3\u306e\u524d\u90e8\u306b\u542b\u3080",m4k3:"\u30d5\u30e9\u30a4\u30c8\u3067\u6bd4\u8f03\u30c6\u30a4\u30b9\u30c6\u30a3\u30f3\u30b0",m4k4:"\u512a\u308c\u305f\u30e1\u30b9\u30ab\u30eb\u306f\u8907\u96d1\u3067\u30d0\u30e9\u30f3\u30b9\u304c\u826f\u3044"
 },
 zh: {
-  lang_name: "中文",
-  hero_title: "梅斯卡尔大师课",
-  hero_sub: "从起源到品鉴，通过4个沉浸式模块探索梅斯卡尔的世界。",
-  hero_cta: "开始学习",
-  progress: "进度",
-  completed_of: "/ 4 已完成",
-  takeaways: "关键要点",
-  ref_title: "参考文献",
-  footer_text: "高端梅斯卡尔体验。慢慢品味，不要一口干掉。",
-  footer_copy: "© 2026 Bostom Bar. 保留所有权利。",
-  m1_title: "什么是梅斯卡尔？",
-  m1_desc: "起源、生产、龙舌兰品种以及是什么让这种烈酒与众不同。",
-  m1_h1: "墨西哥之魂",
-  m1_p1: 'Mezcal一词源自纳瓦特尔语<strong>mexcalli</strong>，意为"烹煮的龙舌兰"。自西班牙征服时期以来，墨西哥就一直在生产梅斯卡尔。在法律上，只有十个墨西哥州可以在原产地名称下认证梅斯卡尔。',
-  m1_h2: "梅斯卡尔产地",
-  m1_p2: "<strong>瓦哈卡、米却肯、普埃布拉、格雷罗、萨卡特卡斯、瓜纳华托、塔毛利帕斯、圣路易斯波托西、杜兰戈和锡那罗亚</strong>。瓦哈卡生产国际市场约80%的梅斯卡尔。",
-  m1_h3: "龙舌兰 — 独一无二的植物",
-  m1_p3: "龙舌兰成熟需要<strong>至少4年</strong>，通常8-10年。收获后植物会死亡。约40种龙舌兰用于制作梅斯卡尔，<strong>espadín</strong>最常见。",
-  m1_t1: "Mezcal在纳瓦特尔语中意为"烹煮的龙舌兰"", m1_t2: "在10个州认证，瓦哈卡产量约80%", m1_t3: "龙舌兰成熟需4-10年，收获后死亡", m1_t4: "约40种龙舌兰用于生产",
-  m2_title: "梅斯卡尔的制作",
-  m2_desc: "从收获到蒸馏——每瓶背后的传统工艺。",
-  m2_h1: "龙舌兰收获",
-  m2_p1: "成熟后，去除<strong>pencas</strong>（叶子）露出<strong>piña</strong>（心脏）。蒸馏厂在瓦哈卡称为<strong>palenque</strong>。",
-  m2_h2: "烘烤",
-  m2_p2: "最传统的方法使用<strong>土窑</strong>，用石头衬里、木柴加热，再用树叶和泥土密封慢慢烘烤。这是梅斯卡尔烟熏味的主要来源。",
-  m2_h3: "碾磨、发酵和蒸馏",
-  m2_p3: "烤好的龙舌兰用手工、<strong>tahona</strong>（石轮）或机器碾碎。纤维在露天发酵罐中由<strong>野生酵母</strong>发酵3-7天。最后在铜、陶、木或钢蒸馏器中蒸馏。",
-  m2_t1: "土窑烘烤piña产生烟熏味", m2_t2: "野生酵母创造复杂风味", m2_t3: "铜/陶/木蒸馏器保留特性", m2_t4: "整个过程植根于数百年传统",
-  m3_title: "梅斯卡尔 vs. 龙舌兰酒",
-  m3_desc: "龙舌兰、工艺、法规和文化的关键区别。",
-  m3_h1: "龙舌兰酒：梅斯卡尔的一种",
-  m3_p1: "龙舌兰酒技术上是梅斯卡尔的一种，自1600年代在哈利斯科州的龙舌兰地区生产。现在只能使用<strong>蓝色龙舌兰（Agave tequilana weber）</strong>。",
-  m3_h2: "生产差异",
-  m3_p2: '梅斯卡尔龙舌兰用土窑或木窑烹饪。龙舌兰酒可使用高压锅或<strong>扩散器</strong>。认证梅斯卡尔为100%龙舌兰，龙舌兰酒有"mixto"类别。',
-  m3_h3: "陈酿与分类",
-  m3_p3: "桶陈在龙舌兰酒中常见但在梅斯卡尔中少见。梅斯卡尔按<strong>生产方法</strong>分类（mezcal、artesanal、ancestral）。相关烈酒包括<strong>raicilla</strong>、<strong>bacanora</strong>和<strong>sotol</strong>。",
-  m3_t1: "龙舌兰酒是梅斯卡尔的一种，反之不然", m3_t2: "龙舌兰酒仅用蓝色龙舌兰，梅斯卡尔用约40种", m3_t3: "认证梅斯卡尔为100%龙舌兰", m3_t4: "梅斯卡尔按生产方法分类",
-  m4_title: "品鉴与享用",
-  m4_desc: "如何啜饮、关注什么，以及为什么梅斯卡尔值得细品。",
-  m4_h1: "酒杯与倒酒",
-  m4_p1: '在<strong>veladora</strong>或Glencairn杯中倒入约30ml。观察<strong>perlas</strong>（气泡）估算酒精度。品尝前静置几分钟。',
-  m4_h2: "Besos技巧",
-  m4_p2: '<strong>Besos</strong>意为"亲吻"。轻轻含入口腔前部，然后在舌头上"咀嚼"。注意<strong>前调</strong>、<strong>中调</strong>和<strong>余味</strong>。',
-  m4_h3: "寻找好的梅斯卡尔",
-  m4_p3: "在梅斯卡尔酒吧点一组品鉴。45-50% ABV所以少量即可。看标签上的100%龙舌兰。<strong>最好的梅斯卡尔不会用烟熏压倒你</strong>。",
-  m4_t1: "使用veladora或Glencairn杯", m4_t2: "用besos含入口腔前部", m4_t3: "点品鉴组合以便比较", m4_t4: "优秀梅斯卡尔复杂平衡，不只是烟熏",
+  ln:"\u4e2d\u6587",hero_title:"\u6885\u65af\u5361\u5c14\u5927\u5e08\u8bfe",hero_sub:"\u4ece\u8d77\u6e90\u5230\u54c1\u9274\uff0c\u901a\u8fc74\u4e2a\u6c89\u6d78\u5f0f\u6a21\u5757\u63a2\u7d22\u6885\u65af\u5361\u5c14\u7684\u4e16\u754c\u3002",hero_cta:"\u5f00\u59cb\u5b66\u4e60",progress:"\u8fdb\u5ea6",cof:"/ 4 \u5df2\u5b8c\u6210",tkwy:"\u5173\u952e\u8981\u70b9",ref:"\u53c2\u8003\u6587\u732e",ftxt:"\u9ad8\u7aef\u6885\u65af\u5361\u5c14\u4f53\u9a8c\u3002\u6162\u6162\u54c1\u5473\u3002",fcopy:"\u00a9 2026 Bostom Bar.",
+  m1t:"\u4ec0\u4e48\u662f\u6885\u65af\u5361\u5c14\uff1f",m1d:"\u8d77\u6e90\u3001\u751f\u4ea7\u3001\u9f99\u820c\u5170\u54c1\u79cd\u3002",
+  m1h1:"\u58a8\u897f\u54e5\u4e4b\u9b42",m1p1:'Mezcal\u6e90\u81ea\u7eb3\u74e6\u7279\u5c14\u8bed<strong>mexcalli</strong>\uff0c\u610f\u4e3a\u201c\u70f9\u716e\u7684\u9f99\u820c\u5170\u201d\u3002\u81ea\u897f\u73ed\u7259\u5f81\u670d\u65f6\u671f\u4ee5\u6765\u58a8\u897f\u54e5\u5c31\u4e00\u76f4\u5728\u751f\u4ea7\u6885\u65af\u5361\u5c14\u3002\u53ea\u6709\u5341\u4e2a\u5dde\u53ef\u4ee5\u8ba4\u8bc1\u3002',
+  m1h2:"\u6885\u65af\u5361\u5c14\u4ea7\u5730",m1p2:"<strong>\u74e6\u54c8\u5361\u3001\u7c73\u5374\u80af\u3001\u666e\u57c3\u5e03\u62c9\u3001\u683c\u96f7\u7f57\u3001\u8428\u5361\u7279\u5361\u65af\u3001\u74dc\u7eb3\u534e\u6258\u3001\u5854\u6bdb\u5229\u5e15\u65af\u3001\u5723\u8def\u6613\u65af\u6ce2\u6258\u897f\u3001\u675c\u5170\u6208\u548c\u9521\u90a3\u7f57\u4e9a</strong>\u3002\u74e6\u54c8\u5361\u751f\u4ea7\u56fd\u9645\u5e02\u573a\u7ea680%\u7684\u6885\u65af\u5361\u5c14\u3002",
+  m1h3:"\u9f99\u820c\u5170 \u2014 \u72ec\u4e00\u65e0\u4e8c\u7684\u690d\u7269",m1p3:"\u9f99\u820c\u5170\u6210\u719f\u9700\u8981<strong>\u81f3\u5c114\u5e74</strong>\uff0c\u901a\u5e388-10\u5e74\u3002\u6536\u83b7\u540e\u690d\u7269\u6b7b\u4ea1\u3002\u7ea640\u79cd\u7528\u4e8e\u5236\u4f5c\u6885\u65af\u5361\u5c14\uff0c<strong>espad\u00edn</strong>\u6700\u5e38\u89c1\u3002",
+  m1k1:"\u7eb3\u74e6\u7279\u5c14\u8bed\u4e2d\u610f\u4e3a\u201c\u70f9\u716e\u7684\u9f99\u820c\u5170\u201d",m1k2:"10\u4e2a\u5dde\u8ba4\u8bc1\uff0c\u74e6\u54c8\u5361\u4ea7\u91cf\u7ea680%",m1k3:"\u6210\u719f\u97004-10\u5e74\uff0c\u6536\u83b7\u540e\u6b7b\u4ea1",m1k4:"\u7ea640\u79cd\u9f99\u820c\u5170\u7528\u4e8e\u751f\u4ea7",
+  m2t:"\u6885\u65af\u5361\u5c14\u7684\u5236\u4f5c",m2d:"\u4ece\u6536\u83b7\u5230\u84b8\u998f\u3002",
+  m2h1:"\u9f99\u820c\u5170\u6536\u83b7",m2p1:"\u53bb\u9664<strong>pencas</strong>\u9732\u51fa<strong>pi\u00f1a</strong>\u3002\u84b8\u998f\u5382\u5728\u74e6\u54c8\u5361\u79f0\u4e3a<strong>palenque</strong>\u3002",
+  m2h2:"\u70d8\u70e4",m2p2:"\u6700\u4f20\u7edf\u7684\u65b9\u6cd5\u4f7f\u7528<strong>\u571f\u7aaf</strong>\u3002\u77f3\u5934\u886c\u91cc\u3001\u6811\u53f6\u548c\u6ce5\u571f\u5bc6\u5c01\u3002\u8fd9\u662f\u70df\u718f\u5473\u7684\u4e3b\u8981\u6765\u6e90\u3002",
+  m2h3:"\u78be\u78e8\u3001\u53d1\u9175\u548c\u84b8\u998f",m2p3:"\u7528<strong>tahona</strong>\u78be\u78e8\u3002\u9732\u5929\u53d1\u9175\u69fd\u4e2d<strong>\u91ce\u751f\u9175\u6bcd</strong>\u53d1\u91753-7\u5929\u3002\u94dc\u3001\u9676\u3001\u6728\u6216\u94a2\u84b8\u998f\u5668\u84b8\u998f\u3002",
+  m2k1:"\u571f\u7aaf\u70d8\u70e4pi\u00f1a\u4ea7\u751f\u70df\u718f\u5473",m2k2:"\u91ce\u751f\u9175\u6bcd\u521b\u9020\u590d\u6742\u98ce\u5473",m2k3:"\u94dc/\u9676/\u6728\u84b8\u998f\u5668\u4fdd\u7559\u7279\u6027",m2k4:"\u6570\u767e\u5e74\u4f20\u7edf",
+  m3t:"\u6885\u65af\u5361\u5c14 vs. \u9f99\u820c\u5170\u9152",m3d:"\u5173\u952e\u533a\u522b\u3002",
+  m3h1:"\u9f99\u820c\u5170\u9152\uff1a\u6885\u65af\u5361\u5c14\u7684\u4e00\u79cd",m3p1:"\u9f99\u820c\u5170\u9152\u662f\u6885\u65af\u5361\u5c14\u7684\u4e00\u79cd\u3002\u53ea\u80fd\u4f7f\u7528<strong>\u84dd\u8272\u9f99\u820c\u5170</strong>\u3002",
+  m3h2:"\u751f\u4ea7\u5dee\u5f02",m3p2:"\u6885\u65af\u5361\u5c14\u7528\u571f\u7aaf\u6216\u67f4\u7aaf\u3002\u9f99\u820c\u5170\u9152\u53ef\u7528\u9ad8\u538b\u950b\u6216<strong>\u6269\u6563\u5668</strong>\u3002\u8ba4\u8bc1\u6885\u65af\u5361\u5c14\u4e3a100%\u9f99\u820c\u5170\u3002\u9f99\u820c\u5170\u9152\u6709\u201cmixto\u201d\u7c7b\u522b\u3002",
+  m3h3:"\u9648\u917f\u4e0e\u5206\u7c7b",m3p3:"\u6876\u9648\u5728\u9f99\u820c\u5170\u9152\u4e2d\u5e38\u89c1\u4f46\u5728\u6885\u65af\u5361\u5c14\u4e2d\u7f55\u89c1\u3002\u6885\u65af\u5361\u5c14\u6309<strong>\u751f\u4ea7\u65b9\u6cd5</strong>\u5206\u7c7b\u3002",
+  m3k1:"\u9f99\u820c\u5170\u9152\u662f\u6885\u65af\u5361\u5c14\u7684\u4e00\u79cd",m3k2:"\u9f99\u820c\u5170\u9152\u4ec5\u7528\u84dd\u8272\u9f99\u820c\u5170",m3k3:"\u8ba4\u8bc1\u6885\u65af\u5361\u5c14\u4e3a100%\u9f99\u820c\u5170",m3k4:"\u6885\u65af\u5361\u5c14\u6309\u751f\u4ea7\u65b9\u6cd5\u5206\u7c7b",
+  m4t:"\u54c1\u9274\u4e0e\u4eab\u7528",m4d:"\u5982\u4f55\u556e\u996e\u3001\u5173\u6ce8\u4ec0\u4e48\u3002",
+  m4h1:"\u9152\u676f\u4e0e\u5012\u9152",m4p1:'\u5728<strong>veladora</strong>\u6216Glencairn\u4e2d\u5012\u5165\u7ea630ml\u3002\u89c2\u5bdf<strong>perlas</strong>\u4f30\u7b97\u9152\u7cbe\u5ea6\u3002\u9759\u7f6e\u51e0\u5206\u949f\u3002',
+  m4h2:"Besos\u6280\u5de7",m4p2:'<strong>Besos</strong>\u610f\u4e3a\u201c\u4eb2\u543b\u201d\u3002\u8f7b\u8f7b\u542b\u5165\u53e3\u8154\u524d\u90e8\uff0c\u7136\u540e\u5728\u820c\u5934\u4e0a\u201c\u54c0\u56bc\u201d\u3002\u6ce8\u610f<strong>\u524d\u8c03</strong>\u3001<strong>\u4e2d\u8c03</strong>\u3001<strong>\u4f59\u5473</strong>\u3002',
+  m4h3:"\u5bfb\u627e\u597d\u7684\u6885\u65af\u5361\u5c14",m4p3:"\u5728\u6885\u65af\u5361\u5c14\u9152\u5427\u70b9\u54c1\u9274\u7ec4\u540845-50% ABV\u3002\u770b100%\u9f99\u820c\u5170\u3002<strong>\u6700\u597d\u7684\u6885\u65af\u5361\u5c14\u4e0d\u4f1a\u7528\u70df\u718f\u538b\u5012\u4f60</strong>\u3002",
+  m4k1:"\u4f7f\u7528veladora\u6216Glencairn",m4k2:"\u7528besos\u542b\u5165\u53e3\u8154\u524d\u90e8",m4k3:"\u70b9\u54c1\u9274\u7ec4\u5408\u4ee5\u4fbf\u6bd4\u8f83",m4k4:"\u4f18\u79c0\u6885\u65af\u5361\u5c14\u590d\u6742\u5e73\u8861"
 }
 };
 
-// ═══════════════════════════════════════════
-// MODULE DATA WITH IMAGES
-// ═══════════════════════════════════════════
-const moduleData = [
-  {
-    id: 1, prefix: 'm1',
-    images: [
-      'https://www.mezcalistas.com/wp-content/uploads/2015/11/IMG_6903-683x1024.jpg',
-      'https://www.mezcalistas.com/wp-content/uploads/2020/06/1-7-768x768.jpg',
-    ]
-  },
-  {
-    id: 2, prefix: 'm2',
-    images: [
-      'https://www.mezcalistas.com/wp-content/uploads/2020/06/1-18-1024x768.jpg',
-      'https://www.mezcalistas.com/wp-content/uploads/2019/03/fermentation-tanks-apaluz.jpg',
-      'https://www.mezcalistas.com/wp-content/uploads/2023/04/571f7904-a7a8-4994-8033-e12450e442bf-768x432.jpg',
-    ]
-  },
-  {
-    id: 3, prefix: 'm3',
-    images: [
-      'https://www.mezcalistas.com/wp-content/uploads/2020/06/1-1.jpg',
-      'https://www.mezcalistas.com/wp-content/uploads/2020/10/2-27.jpg',
-    ]
-  },
-  {
-    id: 4, prefix: 'm4',
-    images: [
-      'https://www.mezcalistas.com/wp-content/uploads/2019/12/La-Luna-Mezcal-7-1024x768.jpg',
-      'https://www.mezcalistas.com/wp-content/uploads/2013/04/IMG_0509-768x512.jpg',
-    ]
-  },
+// MODULE IMAGES
+var MODS = [
+  {id:1,pfx:'m1',imgs:['https://www.mezcalistas.com/wp-content/uploads/2015/11/IMG_6903-683x1024.jpg','https://www.mezcalistas.com/wp-content/uploads/2020/06/1-7-768x768.jpg']},
+  {id:2,pfx:'m2',imgs:['https://www.mezcalistas.com/wp-content/uploads/2020/06/1-18-1024x768.jpg','https://www.mezcalistas.com/wp-content/uploads/2019/03/fermentation-tanks-apaluz.jpg','https://www.mezcalistas.com/wp-content/uploads/2023/04/571f7904-a7a8-4994-8033-e12450e442bf-768x432.jpg']},
+  {id:3,pfx:'m3',imgs:['https://www.mezcalistas.com/wp-content/uploads/2020/06/1-1.jpg','https://www.mezcalistas.com/wp-content/uploads/2020/10/2-27.jpg']},
+  {id:4,pfx:'m4',imgs:['https://www.mezcalistas.com/wp-content/uploads/2019/12/La-Luna-Mezcal-7-1024x768.jpg','https://www.mezcalistas.com/wp-content/uploads/2013/04/IMG_0509-768x512.jpg']}
 ];
 
-const langFlags = { en: '🇬🇧', es: '🇪🇸', ja: '🇯🇵', zh: '🇨🇳' };
+var FLAGS = {en:'\ud83c\uddec\ud83c\udde7',es:'\ud83c\uddea\ud83c\uddf8',ja:'\ud83c\uddef\ud83c\uddf5',zh:'\ud83c\udde8\ud83c\uddf3'};
+var LANGS = ['en','es','ja','zh'];
 
-// ═══════════════════════════════════════════
-// APP COMPONENT
-// ═══════════════════════════════════════════
+// ═══════════════════════════════════════
+// REACT APP (createElement only, no JSX)
+// ═══════════════════════════════════════
 function App() {
-  const [lang, setLang] = React.useState('en');
-  const [openModules, setOpenModules] = React.useState(new Set());
-  const [visited, setVisited] = React.useState(new Set());
+  var _lang = React.useState('en'), lang = _lang[0], setLang = _lang[1];
+  var _open = React.useState({}), openM = _open[0], setOpenM = _open[1];
+  var _vis = React.useState({}), visited = _vis[0], setVisited = _vis[1];
+  var t = T[lang];
 
-  const t = translations[lang];
+  function toggle(id) {
+    setOpenM(function(p){var n=Object.assign({},p);n[id]=!n[id];return n;});
+    setVisited(function(p){var n=Object.assign({},p);n[id]=true;return n;});
+  }
+  function scrollTo(id) {
+    var el = document.getElementById('mod-'+id);
+    if(el) el.scrollIntoView({behavior:'smooth'});
+    if(!openM[id]) toggle(id);
+  }
+  var count = Object.keys(visited).length;
+  var firstUnvisited = MODS.find(function(m){return !visited[m.id]});
 
-  const toggleModule = (id) => {
-    setOpenModules(prev => {
-      const next = new Set(prev);
-      if (next.has(id)) next.delete(id); else next.add(id);
-      return next;
-    });
-    setVisited(prev => { const next = new Set(prev); next.add(id); return next; });
-  };
-
-  const scrollTo = (id) => {
-    document.getElementById('module-' + id)?.scrollIntoView({ behavior: 'smooth' });
-    if (!openModules.has(id)) toggleModule(id);
-  };
-
-  const completedCount = visited.size;
-
-  return (
-    <React.Fragment>
-      {/* NAV */}
-      <nav>
-        <div className="nav-brand"><img src="logo.jpg" alt="Bostom Bar" /></div>
-        <div className="nav-links">
-          {moduleData.map(m => (
-            <button key={m.id} className={'nav-link' + (openModules.has(m.id) ? ' active' : '')} onClick={() => scrollTo(m.id)}>
-              {t[m.prefix + '_title']}
-              {visited.has(m.id) && <span className="check">✓</span>}
-            </button>
-          ))}
-        </div>
-        <div className="lang-switcher">
-          {Object.keys(translations).map(code => (
-            <button key={code} className={'lang-btn' + (lang === code ? ' active' : '')} onClick={() => setLang(code)}>
-              {langFlags[code]} {translations[code].lang_name}
-            </button>
-          ))}
-        </div>
-      </nav>
-
-      {/* HERO */}
-      <section className="hero">
-        <h1>{t.hero_title}</h1>
-        <p className="subtitle">{t.hero_sub}</p>
-        <button className="cta" onClick={() => scrollTo(1)}>{t.hero_cta}</button>
-      </section>
-
-      {/* PROGRESS */}
-      <div className="progress-bar">
-        <span className="progress-label">{t.progress}</span>
-        <div className="progress-dots">
-          {moduleData.map(m => (
-            <div key={m.id}
-              className={'pdot' + (visited.has(m.id) ? ' completed' : '') + (!visited.has(m.id) && m.id === (moduleData.find(x => !visited.has(x.id))?.id) ? ' active' : '')}
-              onClick={() => scrollTo(m.id)}>{visited.has(m.id) ? '✓' : m.id}</div>
-          ))}
-        </div>
-        <span className="progress-text">{completedCount} {t.completed_of}</span>
-      </div>
-
-      {/* MODULES */}
-      <div className="module-section">
-        {moduleData.map((m, idx) => {
-          const p = m.prefix;
-          const isOpen = openModules.has(m.id);
-          return (
-            <div key={m.id} className="module-accordion" id={'module-' + m.id}>
-              <div className="module-header" onClick={() => toggleModule(m.id)}>
-                <span className="module-number">{'0' + m.id}</span>
-                <div>
-                  <div className="module-title">{t[p + '_title']}</div>
-                  <div style={{color:'var(--cream-muted)',fontSize:'.9rem',marginTop:'.2rem'}}>{t[p + '_desc']}</div>
-                </div>
-                <span className={'module-toggle' + (isOpen ? ' open' : '')}>▾</span>
-              </div>
-              <div className={'module-body' + (isOpen ? ' open' : '')}>
-                <div className="module-content">
-                  {m.images[0] && <img className="module-img" src={m.images[0]} alt="" loading="lazy" />}
-                  <h3>{t[p + '_h1']}</h3>
-                  <p dangerouslySetInnerHTML={{__html: t[p + '_p1']}} />
-                  <h3>{t[p + '_h2']}</h3>
-                  <p dangerouslySetInnerHTML={{__html: t[p + '_p2']}} />
-                  {m.images[1] && <img className="module-img" src={m.images[1]} alt="" loading="lazy" />}
-                  <h3>{t[p + '_h3']}</h3>
-                  <p dangerouslySetInnerHTML={{__html: t[p + '_p3']}} />
-                  {m.images[2] && <img className="module-img" src={m.images[2]} alt="" loading="lazy" />}
-                  <div className="takeaways">
-                    <div className="takeaways-title">{t.takeaways}</div>
-                    <ul>
-                      <li>{t[p + '_t1']}</li>
-                      <li>{t[p + '_t2']}</li>
-                      <li>{t[p + '_t3']}</li>
-                      <li>{t[p + '_t4']}</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-          );
-        })}
-      </div>
-
-      {/* REFERENCES */}
-      <section className="references">
-        <h2>{t.ref_title}</h2>
-        <ol>
-          <li>Fuego y Humo — <em>Advanced Guide to Drinking Mezcal</em>. <a href="https://fuegoyhumo.com/blogs/education/advanced-guide-to-drinking-mezcal" target="_blank" rel="noreferrer">fuegoyhumo.com</a></li>
-          <li>Bostom Bar — Business Profile &amp; Branding.</li>
-          <li>Mezcalistas — <em>Ultimate Mezcal 101 Guide</em>. <a href="https://www.mezcalistas.com/mezcal-101/" target="_blank" rel="noreferrer">mezcalistas.com</a></li>
-        </ol>
-      </section>
-
-      {/* FOOTER */}
-      <footer>
-        <div className="footer-brand"><img src="logo.jpg" alt="Bostom Bar" /></div>
-        <p>{t.footer_text}</p>
-        <p style={{marginTop:'1.5rem',fontSize:'.7rem',color:'var(--smoke)'}}>{t.footer_copy}</p>
-      </footer>
-    </React.Fragment>
+  // NAV
+  var nav = h('nav',null,
+    h('div',{className:'nav-brand'},h('img',{src:'logo.jpg',alt:'Bostom Bar'})),
+    h('div',{className:'nav-links'},
+      MODS.map(function(m){
+        return h('button',{key:m.id,className:'nav-link'+(openM[m.id]?' active':''),onClick:function(){scrollTo(m.id);}},
+          t[m.pfx+'t'],
+          visited[m.id]?h('span',{className:'nav-check'},'\u2713'):null
+        );
+      })
+    ),
+    h('div',{className:'lang-sw'},
+      LANGS.map(function(code){
+        return h('button',{key:code,className:'lang-b'+(lang===code?' on':''),onClick:function(){setLang(code);}},
+          FLAGS[code],' ',T[code].ln
+        );
+      })
+    )
   );
+
+  // HERO
+  var hero = h('section',{className:'hero'},
+    h('h1',null,t.hero_title),
+    h('p',{className:'sub'},t.hero_sub),
+    h('button',{className:'cta',onClick:function(){scrollTo(1);}},t.hero_cta)
+  );
+
+  // PROGRESS
+  var pbar = h('div',{className:'pbar'},
+    h('span',{className:'plbl'},t.progress),
+    h('div',{className:'pdots'},
+      MODS.map(function(m){
+        var cls = 'pdot';
+        if(visited[m.id]) cls += ' done';
+        else if(firstUnvisited && m.id === firstUnvisited.id) cls += ' cur';
+        return h('div',{key:m.id,className:cls,onClick:function(){scrollTo(m.id);}},
+          visited[m.id]?'\u2713':m.id
+        );
+      })
+    ),
+    h('span',{className:'ptxt'},count+' '+t.cof)
+  );
+
+  // MODULES
+  var modules = h('div',{className:'mods'},
+    MODS.map(function(m){
+      var p = m.pfx;
+      var isOpen = !!openM[m.id];
+      return h('div',{key:m.id,className:'macc',id:'mod-'+m.id},
+        h('div',{className:'mhdr',onClick:function(){toggle(m.id);}},
+          h('span',{className:'mnum'},'0'+m.id),
+          h('div',{style:{flex:1}},
+            h('div',{className:'mtitle'},t[p+'t']),
+            h('div',{className:'mdesc'},t[p+'d'])
+          ),
+          h('span',{className:'mtog'+(isOpen?' open':'')},'\u25be')
+        ),
+        h('div',{className:'mbody'+(isOpen?' open':'')},
+          h('div',{className:'mcont'},
+            m.imgs[0]?h('img',{className:'mimg',src:m.imgs[0],alt:'',loading:'lazy'}):null,
+            h('h3',null,t[p+'h1']),
+            h('p',{dangerouslySetInnerHTML:{__html:t[p+'p1']}}),
+            h('h3',null,t[p+'h2']),
+            h('p',{dangerouslySetInnerHTML:{__html:t[p+'p2']}}),
+            m.imgs[1]?h('img',{className:'mimg',src:m.imgs[1],alt:'',loading:'lazy'}):null,
+            h('h3',null,t[p+'h3']),
+            h('p',{dangerouslySetInnerHTML:{__html:t[p+'p3']}}),
+            m.imgs[2]?h('img',{className:'mimg',src:m.imgs[2],alt:'',loading:'lazy'}):null,
+            h('div',{className:'tkwy'},
+              h('div',{className:'tkwy-t'},t.tkwy),
+              h('ul',null,
+                h('li',null,t[p+'k1']),
+                h('li',null,t[p+'k2']),
+                h('li',null,t[p+'k3']),
+                h('li',null,t[p+'k4'])
+              )
+            )
+          )
+        )
+      );
+    })
+  );
+
+  // REFERENCES
+  var refs = h('section',{className:'refs'},
+    h('h2',null,t.ref),
+    h('ol',null,
+      h('li',null,'Fuego y Humo \u2014 ',h('em',null,'Advanced Guide to Drinking Mezcal'),'. ',h('a',{href:'https://fuegoyhumo.com/blogs/education/advanced-guide-to-drinking-mezcal',target:'_blank',rel:'noreferrer'},'fuegoyhumo.com')),
+      h('li',null,'Bostom Bar \u2014 Business Profile & Branding.'),
+      h('li',null,'Mezcalistas \u2014 ',h('em',null,'Ultimate Mezcal 101 Guide'),'. ',h('a',{href:'https://www.mezcalistas.com/mezcal-101/',target:'_blank',rel:'noreferrer'},'mezcalistas.com'))
+    )
+  );
+
+  // FOOTER
+  var foot = h('footer',null,
+    h('div',{className:'fbrand'},h('img',{src:'logo.jpg',alt:'Bostom Bar'})),
+    h('p',null,t.ftxt),
+    h('p',{style:{marginTop:'1.5rem',fontSize:'.7rem',color:'var(--smoke)'}},t.fcopy)
+  );
+
+  return h(React.Fragment,null,nav,hero,pbar,modules,refs,foot);
 }
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(<App />);
+ReactDOM.createRoot(document.getElementById('root')).render(h(App));
 </script>
 </body>
 </html>
